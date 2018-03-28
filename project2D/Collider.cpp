@@ -12,7 +12,7 @@ Collider::Collider(Application2D* pApp2D, CameraOperator* pCamOp, Player* pPlaye
 
 	if (m_pPlayer == nullptr)
 	{
-		canCollide = false;
+		m_bCanCollide = false;
 	}
 }
 
@@ -24,12 +24,25 @@ Collider::~Collider()
 }
 
 //----------------------------------------------------------
-// Constructor
+// Collision
 //----------------------------------------------------------
 bool Collider::Collision()
 {
-	if (canCollide)
+	if (m_bCanCollide)
 	{
-		
+		float fPlayerX;
+		float fPlayerY;
+		float fPlayerRadius;
+		m_pPlayer->GetPos(fPlayerX, fPlayerY, fPlayerY);
+
+		fPlayerX += fPlayerRadius + m_fRadius;
+		fPlayerY += fPlayerRadius + m_fRadius;
+
+		if ((m_fX < fPlayerX) || (m_fY < fPlayerY))
+		{	// Collision
+			return true;
+		}
 	}
+	// No Collision
+	return false;
 }
