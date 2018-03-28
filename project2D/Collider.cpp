@@ -2,6 +2,10 @@
 
 #include "Player.h"
 
+
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 Collider::Collider(Application2D* pApp2D, CameraOperator* pCamOp, Player* pPlayer) : Actor(pApp2D, pCamOp)
 {
 	m_pPlayer = pPlayer;
@@ -12,16 +16,20 @@ Collider::Collider(Application2D* pApp2D, CameraOperator* pCamOp, Player* pPlaye
 	}
 }
 
-
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 Collider::~Collider()
 {
 }
 
-
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 bool Collider::Collision()
 {
 	if (canCollide)
 	{
-
+		
 	}
 }

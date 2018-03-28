@@ -12,12 +12,16 @@
 #include "Fish.h"
 #include "Player.h"
 
-
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 Level01::Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp) : MainLevel(pApp2D, pFont, pCapOp)
 {
 }
 
-
+//----------------------------------------------------------
+// Destructor
+//----------------------------------------------------------
 Level01::~Level01()
 {
 }

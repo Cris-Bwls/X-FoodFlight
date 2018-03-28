@@ -17,6 +17,10 @@
 #define UI_PLAY "PLAY"
 #define UI_QUIT "QUIT"
 
+
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp) : BaseMain(pApp2D, pFont, pCapOp)
 {
 	m_nUIElements = 2;
@@ -83,7 +87,9 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 	}
 }
 
-
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 MainMenu::~MainMenu()
 {
 	for (int i = 0; i < m_nUIElements; ++i)
@@ -105,6 +111,9 @@ MainMenu::~MainMenu()
 	delete[] m_apActor;
 }
 
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 void MainMenu::Draw()
 {
 	for (int i = 0; i < m_nUIElements; ++i)
