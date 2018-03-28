@@ -1,0 +1,195 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
+      <Extensions>cpp;c;cc;cxx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
+    </Filter>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;hm;inl;inc;xsd</Extensions>
+    </Filter>
+    <Filter Include="Resource Files">
+      <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
+      <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
+    </Filter>
+    <Filter Include="Header Files\Actor">
+      <UniqueIdentifier>{0692a593-6c4d-4bea-b172-4a5745ed22aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actor">
+      <UniqueIdentifier>{f588aa96-0abd-4ca6-a3f8-f16f928b4f8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseMain">
+      <UniqueIdentifier>{b9ee3093-aceb-48c6-959b-dac724d7ff42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseMain">
+      <UniqueIdentifier>{70df054c-f924-4b62-951f-8e6c2cc66b8d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\BaseMain\MainLevel">
+      <UniqueIdentifier>{b433a40c-a27e-413e-853b-0c5e570f8a42}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\BaseMain\MainLevel">
+      <UniqueIdentifier>{8926088c-c87f-4ba4-801e-a06227c4efa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\UI">
+      <UniqueIdentifier>{ad668be8-60b3-49a8-b0f9-e8c4598e8ffc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\UI">
+      <UniqueIdentifier>{aa77a1ae-c006-4890-bca4-8a40d82f2775}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Textures">
+      <UniqueIdentifier>{add06047-a3c3-4559-acf0-584d95b2eaa6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Textures">
+      <UniqueIdentifier>{d36a78d2-9bab-4c8c-899e-abe5e8bcd0c4}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actor\Environ">
+      <UniqueIdentifier>{c5f7349e-5144-4b03-9d6a-572c52ee5ef5}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor\Environ">
+      <UniqueIdentifier>{8366f78f-9ef6-4779-b7ff-7c056890e22b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Actor\Collider">
+      <UniqueIdentifier>{d66b5baf-ab74-4c2f-a74d-5e6ef3c5d7aa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Actor\Collider">
+      <UniqueIdentifier>{77c2a327-b107-4c65-8f6a-dbcfee1ff9f4}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Application2D.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="main.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="GameManager.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="Actor.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="Player.cpp">
+      <Filter>Source Files\Actor</Filter>
+    </ClCompile>
+    <ClCompile Include="MainLevel.cpp">
+      <Filter>Source Files\BaseMain\MainLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="Level01.cpp">
+      <Filter>Source Files\BaseMain\MainLevel</Filter>
+    </ClCompile>
+    <ClCompile Include="BaseMain.cpp">
+      <Filter>Source Files\BaseMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Health.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Score.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="CameraOperator.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="MainMenu.cpp">
+      <Filter>Source Files\BaseMain</Filter>
+    </ClCompile>
+    <ClCompile Include="Textures.cpp">
+      <Filter>Source Files\Textures</Filter>
+    </ClCompile>
+    <ClCompile Include="UIElement.cpp">
+      <Filter>Source Files\UI</Filter>
+    </ClCompile>
+    <ClCompile Include="Waves.cpp">
+      <Filter>Source Files\Actor\Environ</Filter>
+    </ClCompile>
+    <ClCompile Include="Clouds.cpp">
+      <Filter>Source Files\Actor\Environ</Filter>
+    </ClCompile>
+    <ClCompile Include="Environ.cpp">
+      <Filter>Source Files\Actor\Environ</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>Source Files\Actor\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Fish.cpp">
+      <Filter>Source Files\Actor\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="Collider.cpp">
+      <Filter>Source Files\Actor\Collider</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Application2D.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="GameManager.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Actor.h">
+      <Filter>Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="Player.h">
+      <Filter>Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="MainLevel.h">
+      <Filter>Header Files\BaseMain\MainLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="Level01.h">
+      <Filter>Header Files\BaseMain\MainLevel</Filter>
+    </ClInclude>
+    <ClInclude Include="BaseMain.h">
+      <Filter>Header Files\BaseMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Health.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="Score.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="CameraOperator.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="MainMenu.h">
+      <Filter>Header Files\BaseMain</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumTexture.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="Textures.h">
+      <Filter>Header Files\Textures</Filter>
+    </ClInclude>
+    <ClInclude Include="StructResolution.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="UIElement.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumColour.h">
+      <Filter>Header Files\UI</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumActor.h">
+      <Filter>Header Files\Actor</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumLevel.h">
+      <Filter>Header Files\BaseMain</Filter>
+    </ClInclude>
+    <ClInclude Include="Environ.h">
+      <Filter>Header Files\Actor\Environ</Filter>
+    </ClInclude>
+    <ClInclude Include="Clouds.h">
+      <Filter>Header Files\Actor\Environ</Filter>
+    </ClInclude>
+    <ClInclude Include="Waves.h">
+      <Filter>Header Files\Actor\Environ</Filter>
+    </ClInclude>
+    <ClInclude Include="Collider.h">
+      <Filter>Header Files\Actor\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Fish.h">
+      <Filter>Header Files\Actor\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>Header Files\Actor\Collider</Filter>
+    </ClInclude>
+  </ItemGroup>
+</Project>
