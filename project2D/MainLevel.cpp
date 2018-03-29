@@ -15,7 +15,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp) : BaseMain(pApp2D, pFont, pCapOp)
+MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod) : BaseMain(pApp2D, pFont, pCapOp, pResMod)
 {
 }
 

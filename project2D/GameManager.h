@@ -19,7 +19,8 @@ public:
 	GameManager(Application2D* pApp2D);
 	~GameManager();
 
-	void SetResMod(float fX, float fY);
+	void SetResMod();
+	void CheckResMod();
 	void ChangeLevel();
 	void Update(aie::Input* input, float deltaTime);
 	void Draw();

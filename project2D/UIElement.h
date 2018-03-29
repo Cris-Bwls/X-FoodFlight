@@ -2,6 +2,7 @@
 
 
 #include "EnumColour.h"
+#include "StructResolution.h"
 #include "Input.h"
 #include "Font.h"
 
@@ -11,7 +12,7 @@ class Application2D;
 class UIElement
 {
 public:
-	UIElement(Application2D* pApp2D, EColour eColour, aie::Font* pFont, const char* sText, float fWidth, float fHeight, float fPosX, float fPosY, float fDepth = 0.0f);
+	UIElement(Application2D* pApp2D, Resolution* pResMod, EColour eColour, aie::Font* pFont, const char* sText, float fWidth, float fHeight, float fPosX, float fPosY, float fDepth = 0.0f);
 	~UIElement();
 
 	void ChangePos(float fPosX, float fPosY, float fOffsetX = 0.0f, float fOffsetY = 0.0f);
@@ -20,6 +21,7 @@ public:
 
 private:
 	Application2D*	m_pApp2D; 
+	Resolution*		m_pResMod;
 	EColour			m_eColour;
 	aie::Font*		m_pFont;
 	const char*		m_sText;

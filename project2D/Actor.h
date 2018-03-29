@@ -3,13 +3,15 @@
 #include "Texture.h"
 #include "EnumTexture.h"
 
+#include"StructResolution.h"
+
 class Application2D;
 class CameraOperator;
 
 class Actor
 {
 public:
-	Actor(Application2D* pApp2D, CameraOperator* pCamOp);
+	Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod);
 	virtual ~Actor();
 
 	void SetIsVisible(bool isVisible);
@@ -24,6 +26,7 @@ public:
 protected:
 	Application2D* m_pApp2D = nullptr;
 	CameraOperator* m_pCamOp = nullptr;
+	Resolution* m_pResMod = nullptr;
 	aie::Texture* m_pTexture = nullptr;
 	
 

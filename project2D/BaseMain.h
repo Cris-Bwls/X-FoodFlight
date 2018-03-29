@@ -1,6 +1,7 @@
 #pragma once
 
 #include "EnumActor.h"
+#include "StructResolution.h"
 
 #include "Input.h"
 #include "Font.h"
@@ -14,7 +15,7 @@ class Player;
 class BaseMain
 {
 public:
-	BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp);
+	BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod);
 	virtual ~BaseMain();
 
 	virtual void Update(aie::Input* input, float deltaTime);
@@ -23,6 +24,7 @@ public:
 protected:
 	Application2D*	 m_pApp2D;
 	CameraOperator*  m_pCamOp;
+	Resolution*		 m_pResMod;
 	UIElement**		 m_apUIElement;
 	Actor***		 m_apActor;
 	Player*			 m_pPlayer = nullptr;

@@ -28,9 +28,10 @@
 //				Depth of element (0-100)
 //					lower is closer to screen
 //----------------------------------------------------------
-UIElement::UIElement(Application2D* pApp2D, EColour eColour, aie::Font* pFont, const char* sText, float fWidth, float fHeight, float fPosX, float fPosY, float fDepth)
+UIElement::UIElement(Application2D* pApp2D, Resolution* pResMod, EColour eColour, aie::Font* pFont, const char* sText, float fWidth, float fHeight, float fPosX, float fPosY, float fDepth)
 {
 	m_pApp2D	= pApp2D;
+	m_pResMod	= pResMod;
 	m_eColour	= eColour;
 	m_pFont		= pFont;
 	m_sText		= sText;
@@ -91,9 +92,9 @@ bool UIElement::Update(aie::Input* input)
 	input->getMouseXY(&nMouseX, &nMouseY);
 
 	// Checks if Mouse is over element
-	if ((nMouseX > m_fPosX - (m_fWidth / 2)) && (nMouseX < m_fPosX + (m_fWidth / 2)))
+	if ((nMouseX > (m_fPosX - (m_fWidth / 2))*m_pResMod->fX) && (nMouseX < (m_fPosX + (m_fWidth / 2))*m_pResMod->fX))
 	{
-		if ((nMouseY > m_fPosY - (m_fHeight / 2)) && (nMouseY < m_fPosY + (m_fHeight / 2)))
+		if ((nMouseY > (m_fPosY - (m_fHeight / 2))*m_pResMod->fY) && (nMouseY < (m_fPosY + (m_fHeight / 2))*m_pResMod->fY))
 		{
 			m_eColour = ECOLOUR_WHITE;
 			m_fWidth = m_fWidthOriginal * 1.1;
@@ -116,9 +117,9 @@ bool UIElement::Update(aie::Input* input)
 
 	if (input->wasMouseButtonPressed(0))
 	{
-		if ((nMouseX > m_fPosX - (m_fWidth / 2)) && (nMouseX < m_fPosX + (m_fWidth / 2)))
+		if ((nMouseX > (m_fPosX - (m_fWidth / 2)) * m_pResMod->fX) && (nMouseX < (m_fPosX + (m_fWidth / 2)) * m_pResMod->fX))
 		{
-			if ((nMouseY > m_fPosY - (m_fHeight / 2)) && (nMouseY < m_fPosY + (m_fHeight / 2)))
+			if ((nMouseY > (m_fPosY - (m_fHeight / 2))*m_pResMod->fY) && (nMouseY < (m_fPosY + (m_fHeight / 2))*m_pResMod->fY))
 			{				
 				printf("%s pressed\n", m_sText); //CB:DEBUG
 				
@@ -147,7 +148,7 @@ void UIElement::Draw()
 		m_pApp2D->GetRenderer()->setRenderColour(0, 1, 0, 0.75);
 		break;
 	case ECOLOUR_WHITE:
-		m_pApp2D->GetRenderer()->setRenderColour(0, 0, 0, 0.75);
+		m_pApp2D->GetRenderer()->setRenderColour(1, 1, 1, 0.75);
 		break;
 	case ECOLOUR_SKY_BLUE:
 		m_pApp2D->GetRenderer()->setRenderColour(0, 162, 232, 0.75);
@@ -158,10 +159,10 @@ void UIElement::Draw()
 		printf("UIElement::Draw, Invalid colour\n");
 	}
 
-	m_pApp2D->GetRenderer()->drawBox(m_fPosX, m_fPosY, m_fWidth, m_fHeight, 0.0f, m_fDepth + 1);
+	m_pApp2D->GetRenderer()->drawBox(m_fPosX * m_pResMod->fX, m_fPosY * m_pResMod->fY, m_fWidth * m_pResMod->fX, m_fHeight * m_pResMod->fY, 0.0f, m_fDepth + 1);
 
-	m_pApp2D->GetRenderer()->setRenderColour(1, 1, 1, 1);
-	m_pApp2D->GetRenderer()->drawText(m_pFont, m_sText, m_fPosX - (m_fWidth / 2), m_fPosY - (m_fHeight / 2), m_fDepth);
+	m_pApp2D->GetRenderer()->setRenderColour(0, 0, 0, 1);
+	m_pApp2D->GetRenderer()->drawText(m_pFont, m_sText, (m_fPosX - (m_fWidth / 2)) * m_pResMod->fX, (m_fPosY - (m_fHeight / 2)) * m_pResMod->fY, m_fDepth);
 
 	// End of draw
 	m_pApp2D->GetRenderer()->end();

@@ -1,10 +1,15 @@
 #include "Player.h"
 
+#include "Score.h"
+#include "Health.h"
+
+#define PLAYER_RADIUS 45 // Using Pythag 45.25
+#define PLAYER_SPEED 2
 
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Player::Player(Application2D* pApp2D, CameraOperator* pCamOp) : Actor(pApp2D, pCamOp)
+Player::Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod) : Actor(pApp2D, pCamOp, pResMod)
 {
 }
 

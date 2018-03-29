@@ -4,7 +4,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Waves::Waves(Application2D* pApp2D, CameraOperator* pCamOp) : Environ(pApp2D, pCamOp)
+Waves::Waves(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod) : Environ(pApp2D, pCamOp, pResMod)
 {
 }
 

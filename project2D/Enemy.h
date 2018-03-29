@@ -1,10 +1,12 @@
 #pragma once
-#include "Actor.h"
+#include "Collider.h"
 class Enemy :
-	public Actor
+	public Collider
 {
 public:
-	Enemy(Application2D* pApp2D, CameraOperator* pCamOp);
+	Enemy(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Player* pPlayer = nullptr);
 	~Enemy();
+
+	void Update(float deltaTime);
 };
 

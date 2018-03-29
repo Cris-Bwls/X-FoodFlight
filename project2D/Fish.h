@@ -1,11 +1,12 @@
 #pragma once
-#include "Actor.h"
+#include "Collider.h"
 class Fish :
-	public Actor
+	public Collider
 {
 public:
-	Fish(Application2D* pApp2D, CameraOperator* pCamOp);
-	Fish(const char* filename);
+	Fish(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Player* pPlayer = nullptr);
 	~Fish();
+
+	void Update(float deltaTime);
 };
 

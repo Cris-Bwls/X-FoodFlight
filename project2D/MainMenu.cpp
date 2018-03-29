@@ -21,7 +21,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp) : BaseMain(pApp2D, pFont, pCapOp)
+MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod) : BaseMain(pApp2D, pFont, pCapOp, pResMod)
 {
 	m_nUIElements = 2;
 
@@ -39,10 +39,10 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 	float fWidth, fHeight;
 	pFont->getStringSize(UI_PLAY, fWidth, fHeight);
 
-	m_apUIElement[0] = new UIElement(pApp2D, ECOLOUR_GREEN, pFont, UI_PLAY, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY);
+	m_apUIElement[0] = new UIElement(pApp2D, pResMod, ECOLOUR_GREEN, pFont, UI_PLAY, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY);
 
 	pFont->getStringSize(UI_QUIT, fWidth, fHeight);
-	m_apUIElement[1] = new UIElement(pApp2D, ECOLOUR_RED, pFont, UI_QUIT, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY - 100);
+	m_apUIElement[1] = new UIElement(pApp2D, pResMod, ECOLOUR_RED, pFont, UI_QUIT, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY - 100);
 
 	// Actor Init
 	m_apActor = new Actor**[EACTOR_TOTAL];
@@ -55,28 +55,28 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp);
+				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod);
 			}
 			break;
 		case EACTOR_WAVES:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp);
+				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod);
 			}
 			break;
 		case EACTOR_ENEMY:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Enemy(m_pApp2D, m_pCamOp);
+				m_apActor[i][j] = new Enemy(m_pApp2D, m_pCamOp, pResMod);
 			}
 			break;
 		case EACTOR_FISH:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Fish(m_pApp2D, m_pCamOp);
+				m_apActor[i][j] = new Fish(m_pApp2D, m_pCamOp, pResMod);
 			}
 			break;
 		default:

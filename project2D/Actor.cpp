@@ -9,10 +9,11 @@
 
 //----------------------------------------------------------
 //----------------------------------------------------------
-Actor::Actor(Application2D* pApp2D, CameraOperator* pCamOp)
+Actor::Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod)
 {
 	m_pApp2D = pApp2D;
 	m_pCamOp = pCamOp;
+	m_pResMod = pResMod;
 }
 
 //----------------------------------------------------------

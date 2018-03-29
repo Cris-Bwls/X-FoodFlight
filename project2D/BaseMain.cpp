@@ -16,10 +16,11 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp)
+BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod)
 {
 	m_pApp2D = pApp2D;
 	m_pCamOp = pCamOp;
+	m_pResMod = pResMod;
 }
 
 //----------------------------------------------------------
