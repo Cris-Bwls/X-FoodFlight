@@ -179,6 +179,7 @@
     <ClCompile Include="MainMenu.cpp" />
     <ClCompile Include="Player.cpp" />
     <ClCompile Include="Score.cpp" />
+    <ClCompile Include="StaticSprite.cpp" />
     <ClCompile Include="Textures.cpp" />
     <ClCompile Include="UIElement.cpp" />
     <ClCompile Include="Waves.cpp" />
@@ -200,10 +201,13 @@
     <ClInclude Include="GameManager.h" />
     <ClInclude Include="Health.h" />
     <ClInclude Include="Level01.h" />
+    <ClInclude Include="LinkedList.h" />
     <ClInclude Include="MainLevel.h" />
     <ClInclude Include="MainMenu.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
+    <ClInclude Include="StaticSprite.h" />
+    <ClInclude Include="StructPos.h" />
     <ClInclude Include="StructResolution.h" />
     <ClInclude Include="Textures.h" />
     <ClInclude Include="UIElement.h" />

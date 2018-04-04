@@ -1,6 +1,7 @@
 #pragma once
 
 #include"StructResolution.h"
+#include"StructPos.h"
 
 class Application2D;
 
@@ -15,12 +16,14 @@ public:
 private:
 	Application2D* m_pApp2D;
 	Resolution* m_pResMod;
+	Pos* m_pDevRes;
+	Pos* m_pCameraPos;
 
 	float m_fCameraX;
 	float m_fCameraY;
 
-	float m_fResX;
-	float m_fResY;
+	float m_fResX = 1280;
+	float m_fResY = 720;
 
 	float m_fBarrierLeft;
 	float m_fBarrierRight;

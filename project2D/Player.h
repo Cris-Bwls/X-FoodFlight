@@ -14,6 +14,7 @@ public:
 	void Update(aie::Input* input, float deltaTime);
 
 	void GetPos(float &fPosX, float &fPosY, float &fRadius);
+	Pos* GetPos(float &fRadius);
 
 	void AddFish();
 

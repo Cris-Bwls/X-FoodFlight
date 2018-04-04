@@ -17,7 +17,7 @@ public:
 
 protected:
 	Player* m_pPlayer;
-
+	
 	bool m_bCanCollide = true;
 };
 

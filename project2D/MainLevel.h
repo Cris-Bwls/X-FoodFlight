@@ -1,6 +1,7 @@
 #pragma once
 #include "BaseMain.h"
 
+#include "LinkedList.h"
 #include "EnumActor.h"
 
 #include "Input.h"
@@ -17,5 +18,9 @@ class MainLevel :
 public:
 	MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod);
 	virtual ~MainLevel();
+
+private:
+	LinkedList<Fish>*	m_pListFish;
+	LinkedList<Enemy>*	m_pListEnemy;
 };
 

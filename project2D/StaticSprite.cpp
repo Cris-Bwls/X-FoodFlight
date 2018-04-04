@@ -1,70 +1,67 @@
-#include "Player.h"
+#include "StaticSprite.h"
 
-#include "Score.h"
-#include "Health.h"
-
-#define PLAYER_RADIUS 45 // Using Pythag 45.25
-#define PLAYER_SPEED 2
+#include "Textures.h"
+#include "CameraOperator.h"
 
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Player::Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod) : Actor(pApp2D, pCamOp, pResMod)
+StaticSprite::StaticSprite()
+{
+}
+
+//----------------------------------------------------------
+// Destructor
+//----------------------------------------------------------
+StaticSprite::~StaticSprite()
 {
 }
 
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Player::~Player()
-{
-}
-
-//----------------------------------------------------------
-// Update
-//----------------------------------------------------------
-void Player::Update(aie::Input* input, float deltaTime)
+void StaticSprite::Update()
 {
 
 }
 
 //----------------------------------------------------------
-// GetPos
+// Constructor
 //----------------------------------------------------------
-Pos* Player::GetPos(float &fRadius)
+void StaticSprite::Draw()
 {
-	fRadius = m_fRadius;
-	return m_pCurrentPos;
-}
 
-
-//----------------------------------------------------------
-// GetPos
-//----------------------------------------------------------
-void Player::GetPos(float &fPosX, float &fPosY, float &fRadius)
-{
-	fPosX	= m_fX;
-	fPosY	= m_fY;
-	fRadius = m_fRadius;
 }
 
 //----------------------------------------------------------
-// AddFish
+// Constructor
 //----------------------------------------------------------
-void Player::AddFish()
+void StaticSprite::CheckIsVisible()
 {
-	++m_nFish;
-}
-
-//----------------------------------------------------------
-// TakeFish
-//----------------------------------------------------------
-void Player::TakeFish(bool bTookHit)
-{
-	m_nFish = 0;
-
-	if (bTookHit)
+	if (m_pPos->fX < m_pCamOp->fX)
 	{
-		// Call Score and Health
+
 	}
+}
+
+//----------------------------------------------------------
+// ChangePos
+//		Change Position of sprite
+//
+//			pPos (Pos*):
+//				pointer to position struct
+//----------------------------------------------------------
+void StaticSprite::ChangePos(Pos* pPos)
+{
+	*m_pPos = *pPos;
+}
+
+//----------------------------------------------------------
+// ChangePos
+//		Change Position of sprite
+//----------------------------------------------------------
+void StaticSprite::ChangePos(float fX, float fY)
+{
+	m_pPos->fX = fX;
+	m_pPos->fY = fY;
 }

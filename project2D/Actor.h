@@ -3,6 +3,7 @@
 #include "Texture.h"
 #include "EnumTexture.h"
 
+#include"StructPos.h"
 #include"StructResolution.h"
 
 class Application2D;
@@ -20,18 +21,26 @@ public:
 	virtual void Move(float deltaTime);
 
 	virtual void Update(float deltaTime);
-	virtual void Draw();
-	void GetPos(float &fX, float &fY);
+	virtual void Draw() = 0;
+
+	void SetStartPos(Pos* pPos);
+	void SetStartPos(float fX, float fY);
+
+	Pos* GetStartPos();
+	void GetStartPos(float &fX, float &fY);
+
+	Pos* GetCurrentPos();
+	void GetCurrentPos(float &fX, float &fY);
 	
 protected:
-	Application2D* m_pApp2D = nullptr;
+	Application2D*	m_pApp2D = nullptr;
 	CameraOperator* m_pCamOp = nullptr;
-	Resolution* m_pResMod = nullptr;
-	aie::Texture* m_pTexture = nullptr;
-	
+	Resolution*		m_pResMod = nullptr;
+	aie::Texture*	m_pTexture = nullptr;
 
-	float m_fX = 0.0f;
-	float m_fY = 0.0f;
+	Pos* m_pStartPos = nullptr;
+	Pos* m_pCurrentPos = nullptr;
+
 	float m_fRot = 0.0f;
 
 	float m_fSpeed = 0.0f;

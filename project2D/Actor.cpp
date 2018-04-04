@@ -1,6 +1,7 @@
 #include "Actor.h"
 
 // Higher
+#include "Textures.h"
 #include "Application2D.h"
 #include "CameraOperator.h"
 
@@ -40,27 +41,58 @@ void Actor::SetIsDead(bool isDead)
 //----------------------------------------------------------
 void Actor::Move(float deltaTime)
 {
-	m_fX = m_fSpeed * deltaTime;
-	m_fY = m_fSpeed * deltaTime;
+	m_pCurrentPos->fX += m_fSpeed * deltaTime;
+	m_pCurrentPos->fY += m_fSpeed * deltaTime;
 }
 
 //----------------------------------------------------------
 //----------------------------------------------------------
 void Actor::Update(float deltaTime)
 {
-
+	Move(deltaTime);
 }
 
 //----------------------------------------------------------
 //----------------------------------------------------------
-void Actor::Draw()
+void Actor::SetStartPos(Pos* pPos)
 {
-
+	*m_pStartPos = *pPos;
 }
 
 //----------------------------------------------------------
 //----------------------------------------------------------
-void Actor::GetPos(float &x, float &y)
+void Actor::SetStartPos(float fX, float fY)
 {
+	m_pStartPos->fX = fX;
+	m_pStartPos->fY = fY;
+}
 
+//----------------------------------------------------------
+//----------------------------------------------------------
+Pos* Actor::GetStartPos()
+{
+	return m_pStartPos;
+}
+
+//----------------------------------------------------------
+//----------------------------------------------------------
+void Actor::GetStartPos(float &fX, float &fY)
+{
+	fX = m_pStartPos->fX;
+	fY = m_pStartPos->fY;
+}
+
+//----------------------------------------------------------
+//----------------------------------------------------------
+Pos* Actor::GetCurrentPos()
+{
+	return m_pCurrentPos;
+}
+
+//----------------------------------------------------------
+//----------------------------------------------------------
+void Actor::GetCurrentPos(float &fX, float &fY)
+{
+	fX = m_pCurrentPos->fX;
+	fY = m_pCurrentPos->fY;
 }
