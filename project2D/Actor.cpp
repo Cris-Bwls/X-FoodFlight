@@ -1,7 +1,6 @@
 #include "Actor.h"
 
 // Higher
-#include "Textures.h"
 #include "Application2D.h"
 #include "CameraOperator.h"
 

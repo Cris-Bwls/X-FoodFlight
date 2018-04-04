@@ -203,5 +203,8 @@
     <ClInclude Include="StaticSprite.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="StructBarrier.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

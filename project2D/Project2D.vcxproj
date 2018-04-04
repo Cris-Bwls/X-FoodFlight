@@ -207,6 +207,7 @@
     <ClInclude Include="Player.h" />
     <ClInclude Include="Score.h" />
     <ClInclude Include="StaticSprite.h" />
+    <ClInclude Include="StructBarrier.h" />
     <ClInclude Include="StructPos.h" />
     <ClInclude Include="StructResolution.h" />
     <ClInclude Include="Textures.h" />

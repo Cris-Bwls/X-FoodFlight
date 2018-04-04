@@ -27,6 +27,7 @@ public:
 
 private:
 	Application2D*	m_pApp2D;
+	Resolution*		m_pDevRes;
 	Resolution*		m_pResMod;
 	Textures*		m_pTextures;
 	CameraOperator* m_pCamOp;

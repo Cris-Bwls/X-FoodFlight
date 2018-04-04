@@ -30,10 +30,15 @@ GameManager::GameManager(Application2D* pApp2D)
 {
 	m_pApp2D = pApp2D;
 
-	m_pResMod = new Resolution;
-	m_pCamOp = new CameraOperator(m_pApp2D, m_pResMod);
+	m_pDevRes = new Resolution;
+	m_pDevRes->fX = DEV_RES_X;
+	m_pDevRes->fY = DEV_RES_Y;
 
+	m_pResMod = new Resolution;
 	SetResMod();
+
+
+	m_pCamOp = new CameraOperator(m_pApp2D, m_pResMod);
 
 	m_pTextures = new Textures;
 
@@ -47,9 +52,11 @@ GameManager::GameManager(Application2D* pApp2D)
 GameManager::~GameManager()
 {
 	delete m_pLevel;
+	delete m_pFont;
 	delete m_pTextures;
-	delete m_pResMod;
 	delete m_pCamOp;
+	delete m_pResMod;
+	delete m_pDevRes;
 }
 
 //----------------------------------------------------------
@@ -120,6 +127,9 @@ void GameManager::Update(aie::Input* input, float deltaTime)
 {
 	CheckResMod();
 	m_pLevel->Update(input, deltaTime);
+
+	// Lastly update camera barrier
+	m_pCamOp->UpdateBarrier();
 }
 
 //----------------------------------------------------------

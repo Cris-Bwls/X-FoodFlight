@@ -11,6 +11,8 @@
 #define RES_Y	 720	/*1080*/	/*480*/		// Until I allow the player to choose the resolution
 #define RES_ISFULLSCREEN false	//
 
+#define BACKGROUND_COLOUR 0, 162, 232, 0.75		// Light Blue Background colour
+
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
@@ -35,11 +37,13 @@ bool Application2D::startup()
 {
 	glDisable(GL_CULL_FACE);
 
+	m_pCamPos = new Pos;
+	m_pCamPos->fX = 0;
+	m_pCamPos->fY = 0;
+
 	m_pRenderer2D = new aie::Renderer2D;
 	m_pGame = new GameManager(this);
 
-	m_cameraX = 0;
-	m_cameraY = 0;
 	m_timer = 0;
 
 	return true;
@@ -51,9 +55,10 @@ bool Application2D::startup()
 //----------------------------------------------------------
 void Application2D::shutdown() 
 {
-	delete m_pRes;
-	delete m_pRenderer2D;
 	delete m_pGame;
+	delete m_pRenderer2D;
+	delete m_pCamPos;
+	delete m_pRes;
 }
 
 //----------------------------------------------------------
@@ -79,25 +84,19 @@ void Application2D::update(float deltaTime)
 // draw
 //		Calls all draw functions
 //----------------------------------------------------------
-void Application2D::draw() 
+void Application2D::draw()
 {
 	// set background colour
-	setBackgroundColour(0, 162, 232, 0.75);
+	setBackgroundColour(BACKGROUND_COLOUR);
 
 	// wipe the screen to the background colour
 	clearScreen();
-	
+
 	// set the camera position before we begin rendering
-	m_pRenderer2D->setCameraPos(m_cameraX, m_cameraY);
+	m_pRenderer2D->setCameraPos(m_pCamPos->fX, m_pCamPos->fY);
 
+	// DRAW EVERYTHING
 	m_pGame->Draw();
-
-	// begin drawing sprites
-	m_pRenderer2D->begin();
-
-	
-	// done drawing sprites
-	m_pRenderer2D->end();
 }
 
 //----------------------------------------------------------
@@ -123,8 +122,20 @@ void Application2D::SetRes()
 //----------------------------------------------------------
 void Application2D::SetCameraPos(float fX, float fY)
 {
-	m_cameraX = fX;
-	m_cameraY = fY;
+	m_pCamPos->fX = fX;
+	m_pCamPos->fY = fY;
+}
+
+//----------------------------------------------------------
+// SetCameraPos
+//		Sets Camera Position
+//
+//			pCamPos (Pos*)
+//				pointer to new Camera Position
+//----------------------------------------------------------
+void Application2D::SetCameraPos(Pos* pCamPos)
+{
+	*m_pCamPos = *pCamPos;
 }
 
 //----------------------------------------------------------
@@ -168,8 +179,20 @@ void Application2D::GetRes(float &fX, float &fY, bool &bIsFullscreen)
 //----------------------------------------------------------
 void Application2D::GetCameraPos(float &fX, float &fY)
 {
-	fX = m_cameraX;
-	fY = m_cameraY;
+	fX = m_pCamPos->fX;
+	fY = m_pCamPos->fY;
+}
+
+//----------------------------------------------------------
+//	GetCameraPos
+//		Gets Camera Position
+//
+//			return (Pos*)
+//				returns pointer to Camera Position
+//----------------------------------------------------------
+Pos* Application2D::GetCameraPos()
+{
+	return m_pCamPos;
 }
 
 //----------------------------------------------------------
