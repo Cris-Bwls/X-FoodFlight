@@ -7,11 +7,11 @@ class Collider :
 	public Actor
 {
 public:
-	Collider(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Player* pPlayer = nullptr);
+	Collider(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, Player* pPlayer = nullptr);
 	~Collider();
 
 	virtual void Update(float deltaTime) = 0;
-	void Draw();
+	void Draw() = 0;
 
 	bool Collision();
 

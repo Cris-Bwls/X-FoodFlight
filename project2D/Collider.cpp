@@ -6,7 +6,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Collider::Collider(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Player* pPlayer) : Actor(pApp2D, pCamOp, pResMod)
+Collider::Collider(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, Player* pPlayer) : Actor(pApp2D, pCamOp, pResMod, pTextures)
 {
 	m_pPlayer = pPlayer;
 
@@ -45,11 +45,4 @@ bool Collider::Collision()
 	}
 	// No Collision
 	return false;
-}
-
-//----------------------------------------------------------
-// Collision
-//----------------------------------------------------------
-void Collider::Draw()
-{
 }

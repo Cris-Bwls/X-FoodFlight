@@ -21,14 +21,14 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod) : BaseMain(pApp2D, pFont, pCapOp, pResMod)
+MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures) : BaseMain(pApp2D, pFont, pCapOp, pResMod, pTextures)
 {
 	m_nUIElements = 2;
 
-	m_nActors[EACTOR_CLOUDS]	= 0; //2
-	m_nActors[EACTOR_WAVES]		= 0; //2
-	m_nActors[EACTOR_ENEMY]		= 0; //3
-	m_nActors[EACTOR_FISH]		= 0; //3
+	m_nActors[EACTOR_CLOUDS]	= 0; //2;
+	m_nActors[EACTOR_WAVES]		= 0; //2;
+	m_nActors[EACTOR_ENEMY]		= 0; //3;
+	m_nActors[EACTOR_FISH]		= 0; //3;
 
 	// UI Init
 	m_apUIElement = new UIElement*[m_nUIElements];
@@ -55,28 +55,28 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod);
+				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures);
 			}
 			break;
 		case EACTOR_WAVES:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod);
+				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod, pTextures);
 			}
 			break;
 		case EACTOR_ENEMY:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Enemy(m_pApp2D, m_pCamOp, pResMod);
+				m_apActor[i][j] = new Enemy(m_pApp2D, m_pCamOp, pResMod, pTextures);
 			}
 			break;
 		case EACTOR_FISH:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Fish(m_pApp2D, m_pCamOp, pResMod);
+				m_apActor[i][j] = new Fish(m_pApp2D, m_pCamOp, pResMod, pTextures);
 			}
 			break;
 		default:

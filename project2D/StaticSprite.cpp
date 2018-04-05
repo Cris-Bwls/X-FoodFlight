@@ -13,6 +13,7 @@ StaticSprite::StaticSprite(Application2D* pApp2D, CameraOperator* pCamOp, Resolu
 	m_pCamOp = pCamOp;
 	m_pResMod = pResMod;
 	m_pTexture = pTextures->GetTexture(eTexture);
+	SetUVRect();
 }
 
 //----------------------------------------------------------
@@ -23,7 +24,7 @@ StaticSprite::~StaticSprite()
 }
 
 //----------------------------------------------------------
-// Constructor
+// Update
 //----------------------------------------------------------
 void StaticSprite::Update()
 {
@@ -31,18 +32,21 @@ void StaticSprite::Update()
 }
 
 //----------------------------------------------------------
-// Constructor
+// Draw
 //----------------------------------------------------------
 void StaticSprite::Draw()
 {
 	if (m_bIsVisible)
 	{
-	m_pApp2D->GetRenderer()->drawSprite(m_pTexture, m_pPos->fX, m_pPos->fY, 0, 0, m_fRotation,)
+		//Set UVRect
+		m_pApp2D->GetRenderer()->setUVRect(m_fUvX, m_fUvY, m_fUvW, m_fUVH);
+		//Draw sprite
+		m_pApp2D->GetRenderer()->drawSprite(m_pTexture, m_pPos->fX, m_pPos->fY, m_fWidth, m_fHeight, m_fRotation, m_fDepth);
 	}
 }
 
 //----------------------------------------------------------
-// Constructor
+// CheckIsVisible
 //----------------------------------------------------------
 void StaticSprite::CheckIsVisible()
 {
@@ -60,6 +64,42 @@ void StaticSprite::CheckIsVisible()
 	{
 		// is NOT visible
 		m_bIsVisible = false;
+	}
+}
+
+//----------------------------------------------------------
+// ChangeSize
+//		Change Size of sprite
+//
+//			fHeight (float):
+//				float of new height
+//			fWidth (float):
+//				float of new Width
+//			fHeightOffset (float):
+//				float of offset height
+//			fWidthOffset (float):
+//				float of offset Width
+//----------------------------------------------------------
+void StaticSprite::ChangeSize(float fHeight, float fWidth, float fHeightOffset, float fWidthOffset)
+{
+	if (fHeight != 0.0f)
+	{
+		m_fHeight = fHeight + fHeightOffset;
+
+	}
+	else
+	{
+		m_fHeight += fHeightOffset;
+	}
+
+	if (fWidth != 0.0f)
+	{
+		m_fWidth = fWidth + fWidthOffset;
+
+	}
+	else
+	{
+		m_fWidth += fWidthOffset;
 	}
 }
 
@@ -85,4 +125,16 @@ void StaticSprite::ChangePos(float fX, float fY, float fRotation)
 	m_pPos->fX = fX;
 	m_pPos->fY = fY;
 	m_fRotation = fRotation;
+}
+
+//----------------------------------------------------------
+// SetUVRect
+//		Set UVRect elements
+//----------------------------------------------------------
+void StaticSprite::SetUVRect(float fUvX, float fUvY, float fUvW, float fUvH)
+{
+	m_fUvX = fUvX;
+	m_fUvY = fUvY;
+	m_fUvW = fUvW;
+	m_fUVH = fUvH;
 }

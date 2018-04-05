@@ -2,6 +2,7 @@
 
 //Higher
 #include "Application2D.h"
+#include "Textures.h"
 
 //Lower
 #include "UIElement.h"
@@ -16,7 +17,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod)
+BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures)
 {
 	m_pApp2D = pApp2D;
 	m_pCamOp = pCamOp;

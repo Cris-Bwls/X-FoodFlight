@@ -38,7 +38,7 @@ GameManager::GameManager(Application2D* pApp2D)
 	SetResMod();
 
 
-	m_pCamOp = new CameraOperator(m_pApp2D, m_pResMod);
+	m_pCamOp = new CameraOperator(m_pApp2D, m_pDevRes, m_pResMod);
 
 	m_pTextures = new Textures;
 

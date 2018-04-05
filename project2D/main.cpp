@@ -1,5 +1,7 @@
 #include "Application2D.h"
 
+// Playable BY the 27/04 CB:DATE
+
 #define GAMENAME "Food Flight"
 
 int main() {

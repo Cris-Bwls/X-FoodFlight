@@ -6,7 +6,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Fish::Fish(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Player* pPlayer) : Collider(pApp2D, pCamOp, pResMod, pPlayer)
+Fish::Fish(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, Player* pPlayer) : Collider(pApp2D, pCamOp, pResMod, pTextures, pPlayer)
 {
 }
 
@@ -25,4 +25,10 @@ void Fish::Update(float deltaTime)
 {
 
 }
+
+void Fish::Draw()
+{
+
+}
+
 

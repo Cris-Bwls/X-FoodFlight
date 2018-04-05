@@ -4,7 +4,7 @@ class Environ :
 	public Actor
 {
 public:
-	Environ(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod);
+	Environ(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures);
 	virtual ~Environ();
 };
 

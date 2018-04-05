@@ -8,6 +8,7 @@
 
 class Application2D;
 class CameraOperator;
+class Textures;
 class UIElement;
 class Actor;
 class Player;
@@ -15,7 +16,7 @@ class Player;
 class BaseMain
 {
 public:
-	BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod);
+	BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures);
 	virtual ~BaseMain();
 
 	virtual void Update(aie::Input* input, float deltaTime);

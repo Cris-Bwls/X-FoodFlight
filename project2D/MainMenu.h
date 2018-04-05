@@ -7,7 +7,7 @@ class MainMenu :
 	public BaseMain
 {
 public:
-	MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod);
+	MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures);
 	~MainMenu();
 
 	void Draw();

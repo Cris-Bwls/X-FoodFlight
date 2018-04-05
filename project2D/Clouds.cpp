@@ -2,18 +2,19 @@
 
 // Higher
 #include "Application2D.h"
+#include "Textures.h"
 
 // Lower
 
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Clouds::Clouds(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod) : Environ(pApp2D, pCamOp, pResMod)
+Clouds::Clouds(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : Environ(pApp2D, pCamOp, pResMod, pTextures)
 {
 }
 
 //----------------------------------------------------------
-// Constructor
+// Destructor
 //----------------------------------------------------------
 Clouds::~Clouds()
 {

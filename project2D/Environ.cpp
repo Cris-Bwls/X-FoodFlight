@@ -4,12 +4,12 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Environ::Environ(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod) : Actor(pApp2D, pCamOp, pResMod)
+Environ::Environ(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : Actor(pApp2D, pCamOp, pResMod, pTextures)
 {
 }
 
 //----------------------------------------------------------
-// Constructor
+// Destructor
 //----------------------------------------------------------
 Environ::~Environ()
 {

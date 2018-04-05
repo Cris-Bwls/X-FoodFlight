@@ -16,7 +16,7 @@ class MainLevel :
 	public BaseMain
 {
 public:
-	MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod);
+	MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures);
 	virtual ~MainLevel();
 
 private:

@@ -120,7 +120,7 @@ public:
 
 		if (index < m_nListSize / 2)
 		{
-			pCurrent = m_pStart;
+			pCurrent = m_pStart->m_pNext;
 
 			while (pCurrent != m_pEnd)
 			{
@@ -134,7 +134,8 @@ public:
 		}
 		else
 		{
-			pCurrent = m_pEnd;
+			pCurrent = m_pEnd->m_pPrev;
+			count = m_nListSize - 1;
 
 			while (pCurrent != m_pStart)
 			{

@@ -8,11 +8,12 @@
 
 class Application2D;
 class CameraOperator;
+class Textures;
 
 class Actor
 {
 public:
-	Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod);
+	Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures);
 	virtual ~Actor();
 
 	void SetIsVisible(bool isVisible);

@@ -4,12 +4,12 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Waves::Waves(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod) : Environ(pApp2D, pCamOp, pResMod)
+Waves::Waves(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : Environ(pApp2D, pCamOp, pResMod, pTextures)
 {
 }
 
 //----------------------------------------------------------
-// Constructor
+// Destructor
 //----------------------------------------------------------
 Waves::~Waves()
 {
