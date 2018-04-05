@@ -6,7 +6,9 @@
 #include "CameraOperator.h"
 
 #define PLAYER_RADIUS 45.25f // Using Pythag 45.25
+
 #define PLAYER_SPEED 2.0f	// Arbitrary
+#define FISH_WEIGHT 100	//	
 
 //----------------------------------------------------------
 // Constructor
@@ -30,7 +32,15 @@ Player::~Player()
 //----------------------------------------------------------
 void Player::Update(aie::Input* input, float deltaTime)
 {
+	CheckFish();
 	Move(input, deltaTime);
+}
+
+//----------------------------------------------------------
+// Draw
+//----------------------------------------------------------
+void Player::Draw()
+{
 }
 
 //----------------------------------------------------------
@@ -38,15 +48,15 @@ void Player::Update(aie::Input* input, float deltaTime)
 //----------------------------------------------------------
 void Player::Move(aie::Input* input, float deltaTime)
 {
-	if (input->isKeyDown(aie::INPUT_KEY_UP))
+	if (input->isKeyDown(aie::INPUT_KEY_UP) && m_pCurrentPos->fY < m_fYmax)
 	{
 		m_pCurrentPos->fY += PLAYER_SPEED * 100.0f * deltaTime;
 	}
-	if (input->isKeyDown(aie::INPUT_KEY_DOWN))
+	if (input->isKeyDown(aie::INPUT_KEY_DOWN) && m_pCurrentPos->fY > m_fYmin)
 	{
 		m_pCurrentPos->fY -= PLAYER_SPEED * 100.0f * deltaTime;
 	}
-	if (input->isKeyDown(aie::INPUT_KEY_LEFT))
+	if (input->isKeyDown(aie::INPUT_KEY_LEFT) && m_pCurrentPos->fX > m_fXmin)
 	{
 		float fPlayerPosX = m_pCurrentPos->fX;
 		float fCamPosX = m_pCamOp->GetCamPos()->fX;
@@ -54,13 +64,14 @@ void Player::Move(aie::Input* input, float deltaTime)
 		float fBarrierLeft = m_pCamOp->GetBarrier()->fLeft;
 		
 		// MATH
-		//CB:HERENOW
+		float fRatio = (fMiddle - fBarrierLeft) - fPlayerPosX;
+		fRatio /= (fMiddle - fBarrierLeft);
 
 		// Move
 		fPlayerPosX -= PLAYER_SPEED * 100.0f * deltaTime;
-		fCamPosX -= PLAYER_SPEED * 100.0f * deltaTime;
+		fCamPosX -= PLAYER_SPEED * 100.0f * deltaTime * fRatio;
 	}
-	if (input->isKeyDown(aie::INPUT_KEY_RIGHT))
+	if (input->isKeyDown(aie::INPUT_KEY_RIGHT) && m_pCurrentPos->fX < m_fXmax)
 	{
 		float fPlayerPosX = m_pCurrentPos->fX;
 		float fCamPosX = m_pCamOp->GetCamPos()->fX;
@@ -68,12 +79,26 @@ void Player::Move(aie::Input* input, float deltaTime)
 		float fBarrierRight = m_pCamOp->GetBarrier()->fRight;
 
 		// MATH
-		
+		float fRatio = fPlayerPosX - fMiddle;
+		fRatio /= (fMiddle - fBarrierRight);
 
 		// Move
 		fPlayerPosX += PLAYER_SPEED * 100.0f * deltaTime;
-		fCamPosX += PLAYER_SPEED * 100.0f * deltaTime;
+		fCamPosX += PLAYER_SPEED * 100.0f * deltaTime * fRatio;
 	}
+}
+
+//----------------------------------------------------------
+// SetBoundaries
+//		Boundaries of level
+//----------------------------------------------------------
+void Player::SetBoundaries(float fXmin, float fXmax, float fYmin, float fYmax)
+{
+	m_fXmin = fXmin;
+	m_fXmax = fXmax;
+	m_fYmin = fYmin;
+	m_fYmax = fYmax;
+
 }
 
 //----------------------------------------------------------
@@ -115,4 +140,12 @@ void Player::TakeFish(bool bTookHit)
 	{
 		// Call Score and Health
 	}
+}
+
+//----------------------------------------------------------
+// CheckFish
+//----------------------------------------------------------
+void Player::CheckFish()
+{
+	m_fYmax -= (float)(FISH_WEIGHT * m_nFish);
 }
