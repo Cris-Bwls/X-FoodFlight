@@ -17,8 +17,6 @@ CameraOperator::CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resol
 	m_pBarrier = new Barrier;
 	m_pBarrier->fXMin = BARRIER_OFFSET;
 	m_pBarrier->fXMax = m_pDevRes->fX - BARRIER_OFFSET;
-
-	UpdateBarrier();
 }
 
 //----------------------------------------------------------
@@ -29,28 +27,28 @@ CameraOperator::~CameraOperator()
 	delete m_pBarrier;
 }
 
-
-
 //----------------------------------------------------------
-// UpdateBarrier
+// SetCamPosBounds
 //----------------------------------------------------------
-void CameraOperator::UpdateBarrier()
+void CameraOperator::SetCamPosBounds(float fXmin, float fXmax)
 {
-	m_pBarrier->fLeft = (m_pCamPos->fX + BARRIER_OFFSET);
-	m_pBarrier->fRight = (m_pCamPos->fX + m_pDevRes->fX - BARRIER_OFFSET);
+	m_fXmin = fXmin;
+	m_fXmax = fXmax;
+}
 
-	// IF (left barrier < min allowed)
-	if (m_pBarrier->fLeft < m_pCamPos->fX + m_pBarrier->fXMin)
-	{ 
-		// set camera pos to min allowed
-		m_pCamPos->fX = m_pBarrier->fLeft - BARRIER_OFFSET;
-	}
-	// ELSE IF (right barrier > max allowed)
-	else if (m_pBarrier->fRight > m_pCamPos->fX + m_pBarrier->fXMax)
+//----------------------------------------------------------
+// CheckCamPos
+//----------------------------------------------------------
+void CameraOperator::CheckCamPos()
+{
+	if (m_pCamPos->fX < m_fXmin)
 	{
-		// set camera pos to max allowed
-		m_pCamPos->fX = m_pBarrier->fRight + BARRIER_OFFSET;
-	}	
+		m_pCamPos->fX = m_fXmin;
+	}
+	else if (m_pCamPos->fX> m_fXmax - m_pDevRes->fX)
+	{
+		m_pCamPos->fX = m_fXmax - m_pDevRes->fX;
+	}
 }
 
 //----------------------------------------------------------

@@ -11,8 +11,9 @@ class CameraOperator
 public:
 	CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resolution* pResMod);
 	~CameraOperator();
-
-	void UpdateBarrier();
+	
+	void SetCamPosBounds(float fXmin, float fXmax);
+	void CheckCamPos();
 	
 	Barrier* GetBarrier();
 	Resolution* GetDevRes();
@@ -27,6 +28,7 @@ private:
 
 	Barrier* m_pBarrier;
 
-	
+	float m_fXmin;
+	float m_fXmax;	
 };
 
