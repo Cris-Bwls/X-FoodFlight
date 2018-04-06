@@ -13,13 +13,13 @@ class Player :
 	public Actor
 {
 public:
-	Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, Score* pScore, Health* pHealth);
+	Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, Score* pScore = nullptr, Health* pHealth = nullptr);
 	~Player();
 
-	void Update(aie::Input* input, float deltaTime);
+	void Update(float deltaTime);
 	void Draw();
 
-	void Move(aie::Input* input, float deltaTime);
+	void Move(float deltaTime);
 
 	void SetBoundaries(float fXmin, float fXmax, float Ymin = PLAYER_DEFAULT_YMIN, float yMax = PLAYER_DEFAULT_YMAX);
 

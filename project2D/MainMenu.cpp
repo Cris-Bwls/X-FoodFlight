@@ -44,6 +44,9 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 	pFont->getStringSize(UI_QUIT, fWidth, fHeight);
 	m_apUIElement[1] = new UIElement(pApp2D, pResMod, ECOLOUR_RED, pFont, UI_QUIT, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY - 100);
 
+	//DEBUG
+	m_pPlayer = new Player(pApp2D, pCapOp, pResMod, pTextures);
+
 	// Actor Init
 	m_apActor = new Actor**[EACTOR_TOTAL];
 
@@ -88,7 +91,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 }
 
 //----------------------------------------------------------
-// Constructor
+// Destructor
 //----------------------------------------------------------
 MainMenu::~MainMenu()
 {
@@ -112,10 +115,16 @@ MainMenu::~MainMenu()
 }
 
 //----------------------------------------------------------
-// Constructor
+// Draw
 //----------------------------------------------------------
 void MainMenu::Draw()
 {
+	//DEBUG
+	if (m_pPlayer != nullptr)
+	{
+		m_pPlayer->Draw();
+	}
+
 	for (int i = 0; i < m_nUIElements; ++i)
 	{
 		m_apUIElement[i]->Draw();

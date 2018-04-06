@@ -38,7 +38,7 @@ bool Collider::Collision()
 		fPlayerX += fPlayerRadius + m_fRadius;
 		fPlayerY += fPlayerRadius + m_fRadius;
 
-		if ((m_fX < fPlayerX) || (m_fY < fPlayerY))
+		if ((m_pCurrentPos->fX < fPlayerX) || (m_pCurrentPos->fX < fPlayerY))
 		{	// Collision
 			return true;
 		}

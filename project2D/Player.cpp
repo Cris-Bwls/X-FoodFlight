@@ -1,5 +1,9 @@
 #include "Player.h"
 
+//DEBUG
+#include<iostream>
+
+#include "Application2D.h"
 #include "Textures.h"
 #include "Score.h"
 #include "Health.h"
@@ -18,6 +22,11 @@ Player::Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMo
 	m_pTexture = pTextures->GetTexture(ETEXTURE_BIRD);
 	m_pScore = pScore;
 	m_pHealth = pHealth;
+
+	//DEBUG
+	m_pCurrentPos->fX = 300.0f;
+	m_pCurrentPos->fY = 300.0f;
+	SetBoundaries(150.0f, 2000.0f);
 }
 
 //----------------------------------------------------------
@@ -30,10 +39,10 @@ Player::~Player()
 //----------------------------------------------------------
 // Update
 //----------------------------------------------------------
-void Player::Update(aie::Input* input, float deltaTime)
+void Player::Update(float deltaTime)
 {
 	CheckFish();
-	Move(input, deltaTime);
+	Move(deltaTime);
 }
 
 //----------------------------------------------------------
@@ -41,13 +50,22 @@ void Player::Update(aie::Input* input, float deltaTime)
 //----------------------------------------------------------
 void Player::Draw()
 {
+	m_pApp2D->GetRenderer()->begin();
+	//DEBUG
+	system("cls");
+	printf("CAMPOS: X = %f, Y= %f\n", m_pCamOp->GetCamPos()->fX, m_pCamOp->GetCamPos()->fY);
+	printf("PLAYERPOS: X = %f, Y= %f\n", m_pCurrentPos->fX, m_pCurrentPos->fY);
+	m_pApp2D->GetRenderer()->setUVRect(64, 0, .2f, .5f);
+	m_pApp2D->GetRenderer()->drawSprite(m_pTexture, m_pCurrentPos->fX, m_pCurrentPos->fY, -63.0f, 64.0f, 0.0f, 20.0f);
+	m_pApp2D->GetRenderer()->end();
 }
 
 //----------------------------------------------------------
 // Move
 //----------------------------------------------------------
-void Player::Move(aie::Input* input, float deltaTime)
+void Player::Move(float deltaTime)
 {
+	aie::Input* input = aie::Input::getInstance();
 	if (input->isKeyDown(aie::INPUT_KEY_UP) && m_pCurrentPos->fY < m_fYmax)
 	{
 		m_pCurrentPos->fY += PLAYER_SPEED * 100.0f * deltaTime;
@@ -58,33 +76,43 @@ void Player::Move(aie::Input* input, float deltaTime)
 	}
 	if (input->isKeyDown(aie::INPUT_KEY_LEFT) && m_pCurrentPos->fX > m_fXmin)
 	{
-		float fPlayerPosX = m_pCurrentPos->fX;
 		float fCamPosX = m_pCamOp->GetCamPos()->fX;
+		float fPlayerPosX = m_pCurrentPos->fX - fCamPosX;
 		float fMiddle = m_pCamOp->GetDevRes()->fX / 2;
 		float fBarrierLeft = m_pCamOp->GetBarrier()->fLeft;
 		
 		// MATH
-		float fRatio = (fMiddle - fBarrierLeft) - fPlayerPosX;
-		fRatio /= (fMiddle - fBarrierLeft);
+		double dRatio = fMiddle + fBarrierLeft - fPlayerPosX;
+		dRatio /= (fMiddle + fBarrierLeft);
+		printf("fRatio = %f\n", dRatio);
 
 		// Move
-		fPlayerPosX -= PLAYER_SPEED * 100.0f * deltaTime;
-		fCamPosX -= PLAYER_SPEED * 100.0f * deltaTime * fRatio;
+		m_pCurrentPos->fX -= PLAYER_SPEED * 100.0f * deltaTime;
+		if (dRatio > 0)
+		{
+			fCamPosX -= PLAYER_SPEED * 100.0f * deltaTime * dRatio;
+		}
+		m_pApp2D->SetCameraPos(fCamPosX, 0.0f);
 	}
 	if (input->isKeyDown(aie::INPUT_KEY_RIGHT) && m_pCurrentPos->fX < m_fXmax)
 	{
-		float fPlayerPosX = m_pCurrentPos->fX;
 		float fCamPosX = m_pCamOp->GetCamPos()->fX;
+		float fPlayerPosX = m_pCurrentPos->fX - fCamPosX;
 		float fMiddle = m_pCamOp->GetDevRes()->fX / 2;
 		float fBarrierRight = m_pCamOp->GetBarrier()->fRight;
 
 		// MATH
-		float fRatio = fPlayerPosX - fMiddle;
-		fRatio /= (fMiddle - fBarrierRight);
+		double dRatio = fPlayerPosX - (fBarrierRight - fMiddle);
+		dRatio /= (fBarrierRight - fMiddle);
+		printf("fRatio = %f\n", dRatio);
 
 		// Move
-		fPlayerPosX += PLAYER_SPEED * 100.0f * deltaTime;
-		fCamPosX += PLAYER_SPEED * 100.0f * deltaTime * fRatio;
+		m_pCurrentPos->fX += PLAYER_SPEED * 100.0f * deltaTime;
+		if (dRatio > 0)
+		{
+			fCamPosX += PLAYER_SPEED * 100.0f * deltaTime * dRatio;
+		}
+		m_pApp2D->SetCameraPos(fCamPosX, 0.0f);
 	}
 }
 

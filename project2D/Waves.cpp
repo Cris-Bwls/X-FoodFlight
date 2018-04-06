@@ -14,3 +14,10 @@ Waves::Waves(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod,
 Waves::~Waves()
 {
 }
+
+//----------------------------------------------------------
+// Draw
+//----------------------------------------------------------
+void Waves::Draw()
+{
+}

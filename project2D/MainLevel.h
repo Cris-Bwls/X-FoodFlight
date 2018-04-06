@@ -2,6 +2,7 @@
 #include "BaseMain.h"
 
 #include "LinkedList.h"
+#include "StructPos.h"
 #include "EnumActor.h"
 
 #include "Input.h"
@@ -20,7 +21,7 @@ public:
 	virtual ~MainLevel();
 
 private:
-	LinkedList<Fish>*	m_pListFish;
-	LinkedList<Enemy>*	m_pListEnemy;
+	LinkedList<Pos*>*	m_pListFish;
+	LinkedList<Pos*>*	m_pListEnemy;
 };
 

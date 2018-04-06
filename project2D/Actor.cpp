@@ -15,12 +15,17 @@ Actor::Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod,
 	m_pApp2D = pApp2D;
 	m_pCamOp = pCamOp;
 	m_pResMod = pResMod;
+
+	m_pStartPos = new Pos;
+	m_pCurrentPos = new Pos;
 }
 
 //----------------------------------------------------------
 //----------------------------------------------------------
 Actor::~Actor()
 {
+	delete m_pCurrentPos;
+	delete m_pStartPos;
 }
 
 //----------------------------------------------------------

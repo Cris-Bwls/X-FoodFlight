@@ -7,5 +7,7 @@ class Clouds :
 public:
 	Clouds(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures);
 	~Clouds();
+
+	void Draw();
 };
 

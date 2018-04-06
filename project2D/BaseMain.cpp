@@ -34,16 +34,16 @@ BaseMain::~BaseMain()
 //----------------------------------------------------------
 // Update
 //----------------------------------------------------------
-void BaseMain::Update(aie::Input* input, float deltaTime)
+void BaseMain::Update(float deltaTime)
 {
 	if (m_pPlayer != nullptr)
 	{
-		m_pPlayer->Update(input, deltaTime);
+		m_pPlayer->Update(deltaTime);
 	}
 
 	for (int i = 0; i < m_nUIElements; ++i)
 	{
-		m_apUIElement[i]->Update(input);
+		m_apUIElement[i]->Update();
 	}
 
 	for (int i = 0; i < EACTOR_TOTAL; ++i)

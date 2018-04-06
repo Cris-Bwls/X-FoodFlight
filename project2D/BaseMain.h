@@ -19,7 +19,7 @@ public:
 	BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures);
 	virtual ~BaseMain();
 
-	virtual void Update(aie::Input* input, float deltaTime);
+	virtual void Update(float deltaTime);
 	virtual void Draw();
 
 protected:

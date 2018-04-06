@@ -6,5 +6,7 @@ class Waves :
 public:
 	Waves(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures);
 	~Waves();
+
+	void Draw();
 };
 

@@ -36,23 +36,21 @@ CameraOperator::~CameraOperator()
 //----------------------------------------------------------
 void CameraOperator::UpdateBarrier()
 {
-
-	// IF (left barrier < min allowed)
-	if (m_pBarrier->fLeft < m_pBarrier->fXMin)
-	{ 
-		// set camera pos to min allowed
-		m_pCamPos->fX = m_pBarrier->fXMin - BARRIER_OFFSET;
-	}
-	// ELSE IF (right barrier > max allowed)
-	else if (m_pBarrier->fRight > m_pBarrier->fXMax)
-	{
-		// set camera pos to max allowed
-		m_pCamPos->fX = m_pBarrier->fXMax - (m_pDevRes->fX - BARRIER_OFFSET);
-	}
-
-	// Left and right barriers are then set
 	m_pBarrier->fLeft = (m_pCamPos->fX + BARRIER_OFFSET);
 	m_pBarrier->fRight = (m_pCamPos->fX + m_pDevRes->fX - BARRIER_OFFSET);
+
+	// IF (left barrier < min allowed)
+	if (m_pBarrier->fLeft < m_pCamPos->fX + m_pBarrier->fXMin)
+	{ 
+		// set camera pos to min allowed
+		m_pCamPos->fX = m_pBarrier->fLeft - BARRIER_OFFSET;
+	}
+	// ELSE IF (right barrier > max allowed)
+	else if (m_pBarrier->fRight > m_pCamPos->fX + m_pBarrier->fXMax)
+	{
+		// set camera pos to max allowed
+		m_pCamPos->fX = m_pBarrier->fRight + BARRIER_OFFSET;
+	}	
 }
 
 //----------------------------------------------------------

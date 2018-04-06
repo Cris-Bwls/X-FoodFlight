@@ -22,7 +22,7 @@ public:
 	void SetResMod();
 	void CheckResMod();
 	void ChangeLevel();
-	void Update(aie::Input* input, float deltaTime);
+	void Update(float deltaTime);
 	void Draw();
 
 private:

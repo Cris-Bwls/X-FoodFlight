@@ -19,3 +19,10 @@ Clouds::Clouds(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMo
 Clouds::~Clouds()
 {
 }
+
+//----------------------------------------------------------
+// Draw
+//----------------------------------------------------------
+void Clouds::Draw()
+{
+}

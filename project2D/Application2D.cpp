@@ -73,7 +73,7 @@ void Application2D::update(float deltaTime)
 	// input example
 	aie::Input* input = aie::Input::getInstance();
 	
-	m_pGame->Update(input, deltaTime);
+	m_pGame->Update(deltaTime);
 
 	// exit the application
 	if (input->isKeyDown(aie::INPUT_KEY_ESCAPE))
