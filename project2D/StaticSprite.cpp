@@ -51,7 +51,7 @@ void StaticSprite::Draw()
 void StaticSprite::CheckIsVisible()
 {
 	float fOffset = 100.0f;
-	float fPosX = m_pCamOp->GetCamPos()->fX;
+	float fPosX = m_pCamOp->GetDevCamPos()->fX;
 	float fDevX = m_pCamOp->GetDevRes()->fX;
 	//	IF (PosX < RHS of screen + offset || PosX > LHS of screen - offset)
 	if (m_pPos->fX < fPosX + fDevX + fOffset || m_pPos->fX > fPosX - fOffset)

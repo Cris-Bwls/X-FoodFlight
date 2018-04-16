@@ -39,6 +39,8 @@ private:
 	float m_fYmin;
 	float m_fYmax;
 
+	float m_fFacing;
+
 	int m_nFish = 0;
 };
 

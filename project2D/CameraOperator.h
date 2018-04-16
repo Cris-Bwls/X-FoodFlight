@@ -12,20 +12,24 @@ public:
 	CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resolution* pResMod);
 	~CameraOperator();
 	
-	void SetCamPosBounds(float fXmin, float fXmax);
+	void SetDevCamPosBounds(float fXmin, float fXmax);
 	void CheckCamPos();
 	
-	Barrier* GetBarrier();
 	Resolution* GetDevRes();
-	Pos* GetCamPos();
+	Barrier* GetBarrier();
+	Pos* GetDevCamPos();
+
+	void ChangeRealCamPos();
+	void ChangeBarrier();
 
 
 private:
 	Application2D*	m_pApp2D;
 	Resolution*		m_pDevRes;
 	Resolution*		m_pResMod;
-	Pos*			m_pCamPos;
+	Pos*			m_pRealCamPos;
 
+	Pos*	 m_pDevCamPos;
 	Barrier* m_pBarrier;
 
 	float m_fXmin;

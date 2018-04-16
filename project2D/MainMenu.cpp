@@ -13,6 +13,9 @@
 #include "Fish.h"
 #include "Player.h"
 
+//DEBUG
+#include "CameraOperator.h"
+
 // UI names
 #define UI_PLAY "PLAY"
 #define UI_QUIT "QUIT"
@@ -21,7 +24,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures) : BaseMain(pApp2D, pFont, pCapOp, pResMod, pTextures)
+MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures)
 {
 	m_nUIElements = 2;
 
@@ -45,7 +48,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCap
 	m_apUIElement[1] = new UIElement(pApp2D, pResMod, ECOLOUR_RED, pFont, UI_QUIT, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY - 100);
 
 	//DEBUG
-	m_pPlayer = new Player(pApp2D, pCapOp, pResMod, pTextures);
+	m_pPlayer = new Player(pApp2D, pCamOp, pResMod, pTextures);
 
 	// Actor Init
 	m_apActor = new Actor**[EACTOR_TOTAL];

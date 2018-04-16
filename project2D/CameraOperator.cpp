@@ -12,11 +12,16 @@ CameraOperator::CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resol
 	m_pApp2D = pApp2D;
 	m_pDevRes = pDevRes;
 	m_pResMod = pResMod;
-	m_pCamPos = pApp2D->GetCameraPos();
+	m_pRealCamPos = pApp2D->GetCameraPos();
+	
+	m_pDevCamPos = new Pos;
+	m_pDevCamPos->fX = 0;
+	m_pDevCamPos->fY = 0;
 	
 	m_pBarrier = new Barrier;
-	m_pBarrier->fXMin = BARRIER_OFFSET;
-	m_pBarrier->fXMax = m_pDevRes->fX - BARRIER_OFFSET;
+	ChangeBarrier();
+	//DEBUG
+	SetDevCamPosBounds(0, 2150);
 }
 
 //----------------------------------------------------------
@@ -25,15 +30,16 @@ CameraOperator::CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resol
 CameraOperator::~CameraOperator()
 {
 	delete m_pBarrier;
+	delete m_pDevCamPos;
 }
 
 //----------------------------------------------------------
-// SetCamPosBounds
+// SetCamBarrierBounds
 //----------------------------------------------------------
-void CameraOperator::SetCamPosBounds(float fXmin, float fXmax)
+void CameraOperator::SetDevCamPosBounds(float fXmin, float fXmax)
 {
 	m_fXmin = fXmin;
-	m_fXmax = fXmax;
+	m_fXmax = fXmax - m_pBarrier->fLeft;
 }
 
 //----------------------------------------------------------
@@ -41,14 +47,16 @@ void CameraOperator::SetCamPosBounds(float fXmin, float fXmax)
 //----------------------------------------------------------
 void CameraOperator::CheckCamPos()
 {
-	if (m_pCamPos->fX < m_fXmin)
+	if (m_pDevCamPos->fX < m_fXmin)
 	{
-		m_pCamPos->fX = m_fXmin;
+		m_pDevCamPos->fX = m_fXmin;
 	}
-	else if (m_pCamPos->fX> m_fXmax - m_pDevRes->fX)
+	else if (m_pDevCamPos->fX > m_fXmax)
 	{
-		m_pCamPos->fX = m_fXmax - m_pDevRes->fX;
+		m_pDevCamPos->fX = m_fXmax;
 	}
+
+	ChangeRealCamPos();
 }
 
 //----------------------------------------------------------
@@ -68,9 +76,28 @@ Resolution* CameraOperator::GetDevRes()
 }
 
 //----------------------------------------------------------
-// GetCamPos
+// GetDevCamPos
 //----------------------------------------------------------
-Pos* CameraOperator::GetCamPos()
+Pos* CameraOperator::GetDevCamPos()
 {
-	return m_pCamPos;
+	return m_pDevCamPos;
+}
+
+//----------------------------------------------------------
+// ChangeRealCamPos
+//----------------------------------------------------------
+void CameraOperator::ChangeRealCamPos()
+{
+	m_pRealCamPos->fX = m_pDevCamPos->fX * m_pResMod->fX;
+	m_pRealCamPos->fY = m_pDevCamPos->fY * m_pResMod->fY;
+}
+
+//----------------------------------------------------------
+// ChangeBarrier
+//----------------------------------------------------------
+void CameraOperator::ChangeBarrier()
+{
+	float fHalfResX = m_pDevRes->fX / 2;
+	m_pBarrier->fLeft = m_pDevCamPos->fX + fHalfResX - BARRIER_OFFSET;
+	m_pBarrier->fRight = m_pDevCamPos->fX + fHalfResX + BARRIER_OFFSET;
 }
