@@ -28,8 +28,8 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 {
 	m_nUIElements = 2;
 
-	m_nActors[EACTOR_CLOUDS]	= 0; //2;
-	m_nActors[EACTOR_WAVES]		= 0; //2;
+	m_nActors[EACTOR_CLOUDS]	= 2; //2;
+	m_nActors[EACTOR_WAVES]		= 1; //1;
 	m_nActors[EACTOR_ENEMY]		= 0; //3;
 	m_nActors[EACTOR_FISH]		= 0; //3;
 
@@ -61,14 +61,14 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures);
+				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer->GetCurrentPos());
 			}
 			break;
 		case EACTOR_WAVES:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod, pTextures);
+				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer->GetCurrentPos());
 			}
 			break;
 		case EACTOR_ENEMY:

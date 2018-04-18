@@ -62,6 +62,9 @@ void Actor::Update(float deltaTime)
 void Actor::SetStartPos(Pos* pPos)
 {
 	*m_pStartPos = *pPos;
+
+	// Sets CurrentPos to StartPos
+	*m_pCurrentPos = *m_pStartPos;
 }
 
 //----------------------------------------------------------
@@ -70,6 +73,9 @@ void Actor::SetStartPos(float fX, float fY)
 {
 	m_pStartPos->fX = fX;
 	m_pStartPos->fY = fY;
+
+	// Sets CurrentPos to StartPos
+	*m_pCurrentPos = *m_pStartPos;
 }
 
 //----------------------------------------------------------

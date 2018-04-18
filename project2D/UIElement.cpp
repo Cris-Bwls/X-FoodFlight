@@ -86,7 +86,7 @@ void UIElement::ChangePos(float fPosX, float fPosY, float fOffsetX, float fOffse
 //
 //			return (bool)
 //				-True if mouse clicked on element
-
+//
 //				-False if mouse did not click on element
 //----------------------------------------------------------
 bool UIElement::Update()
@@ -147,10 +147,10 @@ void UIElement::Draw()
 	m_pApp2D->GetRenderer()->begin();
 
 	Colourizer(m_eColourBox);
-	m_pApp2D->GetRenderer()->drawBox((m_fPosX + m_pCamPos->fX) * m_pResMod->fX, m_fPosY * m_pResMod->fY, m_fWidth * m_pResMod->fX, m_fHeight * m_pResMod->fY, 0.0f, m_fDepth + 1);
+	m_pApp2D->GetRenderer()->drawBox((m_fPosX * m_pResMod->fX) + m_pCamPos->fX, m_fPosY * m_pResMod->fY, m_fWidth * m_pResMod->fX, m_fHeight * m_pResMod->fY, 0.0f, m_fDepth + 1);
 
 	Colourizer(m_eColourText);
-	m_pApp2D->GetRenderer()->drawText(m_pFont, m_sText, ((m_fPosX + m_pCamPos->fX) - (m_fWidth / 2)) * m_pResMod->fX, (m_fPosY - (m_fHeight / 2)) * m_pResMod->fY, m_fDepth);
+	m_pApp2D->GetRenderer()->drawText(m_pFont, m_sText, ((m_fPosX - (m_fWidth / 2)) * m_pResMod->fX) + m_pCamPos->fX, (m_fPosY - (m_fHeight / 2)) * m_pResMod->fY, m_fDepth);
 
 	// End of draw
 	m_pApp2D->GetRenderer()->end();
