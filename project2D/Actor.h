@@ -1,5 +1,6 @@
 #pragma once
 
+#include "Renderer2D.h"
 #include "Texture.h"
 #include "EnumTexture.h"
 
@@ -34,10 +35,11 @@ public:
 	void GetCurrentPos(float &fX, float &fY);
 	
 protected:
-	Application2D*	m_pApp2D = nullptr;
-	CameraOperator* m_pCamOp = nullptr;
-	Resolution*		m_pResMod = nullptr;
-	aie::Texture*	m_pTexture = nullptr;
+	Application2D*	 m_pApp2D = nullptr;
+	aie::Renderer2D* m_pRenderer = nullptr;
+	CameraOperator*  m_pCamOp = nullptr;
+	Resolution*		 m_pResMod = nullptr;
+	aie::Texture*	 m_pTexture = nullptr;
 
 	Pos* m_pStartPos = nullptr;
 	Pos* m_pCurrentPos = nullptr;

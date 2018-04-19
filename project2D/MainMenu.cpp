@@ -61,7 +61,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer->GetCurrentPos());
+				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer->GetCurrentPos(), 1.0f - ((float)j/2), -150.0f * (float)j, 1.0f - (0.5f * (float)j), j);
 			}
 			break;
 		case EACTOR_WAVES:
@@ -105,7 +105,7 @@ MainMenu::~MainMenu()
 
 	for (int i = 0; i < EACTOR_TOTAL; ++i)
 	{
-		for (int j = 0; j < m_nActors[i]; ++i)
+		for (int j = 0; j < m_nActors[i]; ++j)
 		{
 			delete m_apActor[i][j];
 		}
@@ -115,6 +115,8 @@ MainMenu::~MainMenu()
 
 	delete[] m_apUIElement;
 	delete[] m_apActor;
+
+	delete m_pPlayer;
 }
 
 //----------------------------------------------------------
@@ -135,9 +137,24 @@ void MainMenu::Draw()
 
 	for (int i = 0; i < EACTOR_TOTAL; ++i)
 	{
-		for (int j = 0; j < m_nActors[i]; ++i)
+		for (int j = 0; j < m_nActors[i]; ++j)
 		{
 			m_apActor[i][j]->Draw();
 		}
+	}
+}
+
+//----------------------------------------------------------
+// UpdateUI
+//----------------------------------------------------------
+void MainMenu::UpdateUI(float deltaTime)
+{
+	// Play
+	m_apUIElement[0]->Update();
+
+	// Quit
+	if (m_apUIElement[1]->Update())
+	{
+		m_pApp2D->quit();
 	}
 }

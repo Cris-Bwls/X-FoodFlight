@@ -120,6 +120,9 @@
     <ClCompile Include="StaticSprite.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="ColliderController.cpp">
+      <Filter>Source Files\Actor\Collider</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Application2D.h">
@@ -194,9 +197,6 @@
     <ClInclude Include="EnumActor.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
-    <ClInclude Include="LinkedList.h">
-      <Filter>Resource Files</Filter>
-    </ClInclude>
     <ClInclude Include="StructPos.h">
       <Filter>Resource Files</Filter>
     </ClInclude>
@@ -205,6 +205,21 @@
     </ClInclude>
     <ClInclude Include="StructBarrier.h">
       <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DynamicArray.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="LinkedList.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="Stack.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="DeQue.h">
+      <Filter>Resource Files</Filter>
+    </ClInclude>
+    <ClInclude Include="ColliderController.h">
+      <Filter>Header Files\Actor\Collider</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -22,6 +22,8 @@ public:
 	virtual void Update(float deltaTime);
 	virtual void Draw();
 
+	virtual void UpdateUI(float deltaTime) = 0;
+
 protected:
 	Application2D*	 m_pApp2D;
 	CameraOperator*  m_pCamOp;

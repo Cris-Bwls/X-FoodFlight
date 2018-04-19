@@ -3,7 +3,7 @@
 
 #include "Input.h"
 
-#define PLAYER_DEFAULT_YMIN 100.0f
+#define PLAYER_DEFAULT_YMIN 50.0f
 #define PLAYER_DEFAULT_YMAX 620.0f //720 - 100
 
 class Score;

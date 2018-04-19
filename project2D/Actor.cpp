@@ -13,6 +13,7 @@
 Actor::Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures)
 {
 	m_pApp2D = pApp2D;
+	m_pRenderer = m_pApp2D->GetRenderer();
 	m_pCamOp = pCamOp;
 	m_pResMod = pResMod;
 

@@ -34,7 +34,7 @@ public:
 	//--------------------------------------------------
 	~LinkedList() 
 	{
-		clear();
+		Clear();
 
 		delete m_pStart;
 		delete m_pEnd;
@@ -136,7 +136,6 @@ public:
 		{
 			pCurrent = m_pEnd->m_pPrev;
 			count = m_nListSize - 1;
-
 			while (pCurrent != m_pStart)
 			{
 				if (index == count)
@@ -147,7 +146,7 @@ public:
 				--count;
 			}
 		}
-		return m_pCurrent->m_data;
+		return pCurrent->m_data;
 	}
 
 	//--------------------------------------------------
@@ -158,7 +157,7 @@ public:
 	//--------------------------------------------------
 	T& operator[] (int index)
 	{
-		return GetValue(index);
+		return GetData(index);
 	}
 
 	//--------------------------------------------------
@@ -202,6 +201,35 @@ public:
 		delete pNode;
 
 		--m_nListSize;
+	}
+
+	//--------------------------------------------------
+	// PopBack
+	//
+	//--------------------------------------------------
+	void PopBack()
+	{
+		PopPoint(m_pEnd->m_pPrev);
+	}
+
+	//--------------------------------------------------
+	// PopFront
+	//
+	//--------------------------------------------------
+	void PopFront()
+	{
+		PopPoint(m_pStart->m_pNext);
+	}
+
+	//--------------------------------------------------
+	// Size
+	//
+	//		index (int):
+	//			position in array
+	//--------------------------------------------------
+	int Size()
+	{
+		return m_nListSize;
 	}
 
 private:

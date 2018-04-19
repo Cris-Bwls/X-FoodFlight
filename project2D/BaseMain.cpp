@@ -41,14 +41,11 @@ void BaseMain::Update(float deltaTime)
 		m_pPlayer->Update(deltaTime);
 	}
 
-	for (int i = 0; i < m_nUIElements; ++i)
-	{
-		m_apUIElement[i]->Update();
-	}
+	UpdateUI(deltaTime);
 
 	for (int i = 0; i < EACTOR_TOTAL; ++i)
 	{
-		for (int j = 0; j < m_nActors[i]; ++i)
+		for (int j = 0; j < m_nActors[i]; ++j)
 		{
 			m_apActor[i][j]->Update(deltaTime);
 		}

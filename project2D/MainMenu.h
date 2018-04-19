@@ -11,5 +11,7 @@ public:
 	~MainMenu();
 
 	void Draw();
+
+	void UpdateUI(float deltaTime);
 };
 

@@ -59,10 +59,8 @@ void Player::Draw()
 	float fResModX = m_pResMod->fX;
 	float fResModY = m_pResMod->fY;
 
-	m_pApp2D->GetRenderer()->begin();
-	m_pApp2D->GetRenderer()->setUVRect(64, 0, .2f, .5f);
-	m_pApp2D->GetRenderer()->drawSprite(m_pTexture, m_pCurrentPos->fX * fResModX, m_pCurrentPos->fY * fResModY, m_fFacing * fResModX, 64.0f * fResModY, 0.0f, 20.0f);
-	m_pApp2D->GetRenderer()->end();
+	m_pRenderer->setUVRect(64, 0, .2f, .5f);
+	m_pRenderer->drawSprite(m_pTexture, m_pCurrentPos->fX * fResModX, m_pCurrentPos->fY * fResModY, m_fFacing * fResModX, 64.0f * fResModY, 0.0f, 20.0f);
 
 	//DEBUG
 	system("cls");

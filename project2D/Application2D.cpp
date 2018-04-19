@@ -9,7 +9,7 @@
 // Defines
 #define RES_X	 1280	/*1920*/	/*640*/		// CB:DEBUG
 #define RES_Y	 720	/*1080*/	/*480*/		// Until I allow the player to choose the resolution
-#define RES_ISFULLSCREEN false	//
+#define RES_ISFULLSCREEN false					//
 
 #define BACKGROUND_COLOUR 0, 162, 232, 0.75		// Light Blue Background colour
 
@@ -92,11 +92,13 @@ void Application2D::draw()
 	// wipe the screen to the background colour
 	clearScreen();
 
+	m_pRenderer2D->begin();
 	// set the camera position before we begin rendering
 	m_pRenderer2D->setCameraPos(m_pCamPos->fX, m_pCamPos->fY);
 
 	// DRAW EVERYTHING
 	m_pGame->Draw();
+	m_pRenderer2D->end();
 }
 
 //----------------------------------------------------------
