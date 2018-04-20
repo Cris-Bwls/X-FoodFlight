@@ -14,12 +14,21 @@ public:
 	ColliderController(Collider** apCollider, CameraOperator* pCamOp, Player* pPlayer = nullptr);
 	~ColliderController();
 
+	void Update();
+
+	void CheckEnds();
+	void AddPos(Pos* pos);
+
 private:
 	Collider**		m_apCollider;
-	CameraOperator* m_pCamOp;
-	Player*			m_pPlayer;
+	Pos*			m_pPlayerPos;
 
 	LinkedList<Pos*> m_llPos;
-	DeQue<double> m_dqListPos;
+	DeQue<LinkedListNode<Pos*>*> m_dqListPos;
+
+	float m_fDevResX;
+
+	bool m_bHasFirst;
+	bool m_bHasLast;
 };
 
