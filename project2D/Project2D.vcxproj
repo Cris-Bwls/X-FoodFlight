@@ -163,6 +163,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
+    <ClCompile Include="AnimFSM.cpp" />
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="BaseMain.cpp" />
     <ClCompile Include="CameraOperator.cpp" />
@@ -187,6 +188,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Actor.h" />
+    <ClInclude Include="AnimFSM.h" />
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="BaseMain.h" />
     <ClInclude Include="CameraOperator.h" />
@@ -197,6 +199,7 @@
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="EnumActor.h" />
+    <ClInclude Include="EnumAnimStates.h" />
     <ClInclude Include="EnumColour.h" />
     <ClInclude Include="EnumLevel.h" />
     <ClInclude Include="EnumTexture.h" />

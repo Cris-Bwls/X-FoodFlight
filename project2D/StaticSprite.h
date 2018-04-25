@@ -13,7 +13,7 @@ class Textures;
 class StaticSprite
 {
 public:
-	StaticSprite(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, ETexture eTexture, float fDepth = 0.0f);
+	StaticSprite(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, ETexture eTexture, Pos* pPos, float fDepth = 0.0f);
 	~StaticSprite();
 
 	void Update();

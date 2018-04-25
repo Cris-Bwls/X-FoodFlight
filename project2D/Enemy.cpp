@@ -1,6 +1,9 @@
 #include "Enemy.h"
 
+#define ENEMY_SIZE_X 64.0f // X size of texture
+#define ENEMY_SIZE_Y 64.0f // Y size of texture
 #define ENEMY_RADIUS 45 // Using Pythag 45.25
+
 #define ENEMY_SPEED 2
 
 //----------------------------------------------------------

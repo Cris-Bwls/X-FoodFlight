@@ -1,0 +1,10 @@
+#pragma once
+
+enum EAnimStates
+{
+	EANIMSTATES_IDLE = 0,
+	EANIMSTATES_MOVE,
+	EANIMSTATES_DIVE,
+
+	EANIMSTATES_TOTAL
+};

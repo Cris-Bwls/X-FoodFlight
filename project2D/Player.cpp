@@ -9,12 +9,14 @@
 #include "Health.h"
 #include "CameraOperator.h"
 
-#define PLAYER_SIZE 64.0f;	// Size of texture
+#define PLAYER_SIZE_X 64.0f;	// X size of texture
+#define PLAYER_SIZE_Y 64.0f;	// Y size of texture
 #define PLAYER_RADIUS 45.25f // Using Pythag 45.25
 
 #define PLAYER_HORIZ_SPEED 2.0f	// Arbitrary
 #define PLAYER_VERT_SPEED 2.0f	// Arbitrary
-#define FISH_WEIGHT 100	//	
+
+#define FISH_WEIGHT 100	//
 
 //----------------------------------------------------------
 // Constructor
@@ -27,7 +29,7 @@ Player::Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMo
 	m_pHealth = pHealth;
 
 	// Player starts facing right
-	m_fFacing = -PLAYER_SIZE + 1;
+	m_fFacing = -PLAYER_SIZE_X + 1;
 
 	//DEBUG
 	m_pCurrentPos->fX = 300.0f;
@@ -87,7 +89,7 @@ void Player::Move(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_LEFT) && m_pCurrentPos->fX > m_fXmin)
 	{
 		// sprite faces left
-		m_fFacing = PLAYER_SIZE;
+		m_fFacing = PLAYER_SIZE_X;
 		// Player moves left
 		m_pCurrentPos->fX -= PLAYER_HORIZ_SPEED * 100.0f * deltaTime;
 
@@ -99,7 +101,7 @@ void Player::Move(float deltaTime)
 	if (input->isKeyDown(aie::INPUT_KEY_RIGHT) && m_pCurrentPos->fX < m_fXmax)
 	{
 		// sprite faces right
-		m_fFacing = -PLAYER_SIZE + 1;
+		m_fFacing = -PLAYER_SIZE_X + 1;
 		// Player moves right
 		m_pCurrentPos->fX += PLAYER_HORIZ_SPEED * 100.0f * deltaTime;
 

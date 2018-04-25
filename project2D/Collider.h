@@ -15,9 +15,16 @@ public:
 
 	bool Collision();
 
+	void CheckVisible();
+
+	void SetIsEnabled(bool bIsEnabled = true);
+	bool GetIsEnabled();
+
+
 protected:
 	Player* m_pPlayer;
 	
 	bool m_bCanCollide = true;
+	bool m_bIsEnabled = false;
 };
 

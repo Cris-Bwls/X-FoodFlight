@@ -55,6 +55,54 @@
     <Filter Include="Source Files\Actor\Collider">
       <UniqueIdentifier>{77c2a327-b107-4c65-8f6a-dbcfee1ff9f4}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Header Files\StateMachines">
+      <UniqueIdentifier>{5f901c97-3d7f-4473-a90e-1be47202f1a8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\Anim">
+      <UniqueIdentifier>{a515767c-dfdc-4d63-b5d7-1f3958176e09}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\Anim\States">
+      <UniqueIdentifier>{6e3850f4-6d3e-4958-9b86-6badeb6fca76}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines">
+      <UniqueIdentifier>{6c283688-27c4-480e-8d62-ec2a8fe31d0b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\Anim">
+      <UniqueIdentifier>{53a107f3-2f3d-40f8-82e7-f821fe7f81e2}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\Anim\States">
+      <UniqueIdentifier>{4c74edff-db8b-4bbe-9790-17b0f770de31}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\AI">
+      <UniqueIdentifier>{ca15436a-4b09-4695-a4ab-366c49986112}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\AI">
+      <UniqueIdentifier>{c8f9bb50-ce6b-4674-9bb5-705d75cc0c49}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\AI\FishAI">
+      <UniqueIdentifier>{137b47e4-dde9-4d1a-92c3-40435ab4c445}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\AI\FishAI\States">
+      <UniqueIdentifier>{3b31e457-33de-4822-b196-5f5a81d65105}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\AI\EnemyAI">
+      <UniqueIdentifier>{79f7f944-7635-4c60-895e-480edf9ecaaa}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\StateMachines\AI\EnemyAI\States">
+      <UniqueIdentifier>{757b7a7b-1b33-4dd2-ab57-702bc1b31ce8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\AI\FishAI">
+      <UniqueIdentifier>{2da2b71b-e55a-4ac1-b6a0-3ce43dbd5958}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\AI\FishAI\States">
+      <UniqueIdentifier>{325524a6-89f9-4c1b-97d7-ad7b4306fbc9}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\AI\EnemyAI">
+      <UniqueIdentifier>{801f5120-0266-4ce2-b762-00c33308c7d6}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\StateMachines\AI\EnemyAI\States">
+      <UniqueIdentifier>{b9223c91-2e54-4c27-8f7b-6ef3dde29c2f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Application2D.cpp">
@@ -122,6 +170,9 @@
     </ClCompile>
     <ClCompile Include="ColliderController.cpp">
       <Filter>Source Files\Actor\Collider</Filter>
+    </ClCompile>
+    <ClCompile Include="AnimFSM.cpp">
+      <Filter>Source Files\StateMachines\Anim</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -220,6 +271,12 @@
     </ClInclude>
     <ClInclude Include="ColliderController.h">
       <Filter>Header Files\Actor\Collider</Filter>
+    </ClInclude>
+    <ClInclude Include="AnimFSM.h">
+      <Filter>Header Files\StateMachines\Anim</Filter>
+    </ClInclude>
+    <ClInclude Include="EnumAnimStates.h">
+      <Filter>Resource Files</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

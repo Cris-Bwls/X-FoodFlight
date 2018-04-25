@@ -1,7 +1,9 @@
 #include "Collider.h"
 
 #include "Player.h"
+#include "CameraOperator.h"
 
+#define OFFSET 150.0f
 
 //----------------------------------------------------------
 // Constructor
@@ -14,6 +16,8 @@ Collider::Collider(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pR
 	{
 		m_bCanCollide = false;
 	}
+
+	m_bIsEnabled = false;
 }
 
 //----------------------------------------------------------
@@ -45,4 +49,41 @@ bool Collider::Collision()
 	}
 	// No Collision
 	return false;
+}
+
+//----------------------------------------------------------
+// CheckVisible
+//----------------------------------------------------------
+void Collider::CheckVisible()
+{
+	float fCamPosX = m_pCamOp->GetDevCamPos()->fX;
+	float fRevResX = m_pCamOp->GetDevRes()->fX;
+
+	// IF current pos between LHS of screen AND RHS of screen
+	if ((m_pCurrentPos->fX > (fCamPosX - OFFSET)) && (m_pCurrentPos->fX < fCamPosX + fRevResX + OFFSET))
+	{
+		// IS visible
+		m_bIsVisible = true;
+	}
+	else
+	{
+		//	NOT visible
+		m_bIsVisible = false;
+	}
+}
+
+//----------------------------------------------------------
+// SetIsEnabled
+//----------------------------------------------------------
+void Collider::SetIsEnabled(bool bIsEnabled)
+{
+	m_bIsEnabled = bIsEnabled;
+}
+
+//----------------------------------------------------------
+// GetIsEnabled
+//----------------------------------------------------------
+bool Collider::GetIsEnabled()
+{
+	return m_bIsEnabled;
 }

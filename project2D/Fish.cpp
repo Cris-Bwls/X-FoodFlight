@@ -1,6 +1,9 @@
 #include "Fish.h"
 
+#define FISH_SIZE_X 37.0f // X size of texture
+#define FISH_SIZE_Y 24.0f // Y size of texture
 #define FISH_RADIUS 22 // Using Pythag 22.05
+
 #define FISH_SPEED 2
 
 //----------------------------------------------------------
