@@ -12,6 +12,9 @@
 #include "BaseMain.h"
 #include "MainMenu.h"
 
+#include "MainLevel.h"
+#include "Level01.h"
+
 // Developed Resolution
 #define DEV_RES_X 1280.0f
 #define DEV_RES_Y 720.0f
@@ -102,8 +105,8 @@ void GameManager::ChangeLevel()
 		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures);
 		break;
 	case ELEVEL_LEVEL_01:
-		delete m_pLevel;
-		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures); //CB:DEBUG
+		delete m_pLevel;	//CB:HERENOW
+		m_pLevel = new Level01(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures); //CB:DEBUG
 		break;
 	case ELEVEL_LEVEL_02:
 		delete m_pLevel;

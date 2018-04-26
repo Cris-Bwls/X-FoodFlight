@@ -2,20 +2,24 @@
 
 #include "EnumAnimStates.h"
 
+class AnimIdle;
+class AnimMove;
+
 class AnimFSM
 {
 public:
-	AnimFSM(bool bIsEnemy = true);
+	AnimFSM();
 	~AnimFSM();
 
-	int Update();
+	float Update();
 
 	void ChangeState(EAnimStates eAnimState);
 
 private:
 	EAnimStates m_eAnimState = EANIMSTATES_IDLE;
 
-	bool m_bIsEnemy;
+	AnimIdle* m_pAnimIdle;
+	AnimMove* m_pAnimMove;
 };
 
 

@@ -164,6 +164,8 @@
   <ItemGroup>
     <ClCompile Include="Actor.cpp" />
     <ClCompile Include="AnimFSM.cpp" />
+    <ClCompile Include="AnimIdle.cpp" />
+    <ClCompile Include="AnimMove.cpp" />
     <ClCompile Include="Application2D.cpp" />
     <ClCompile Include="BaseMain.cpp" />
     <ClCompile Include="CameraOperator.cpp" />
@@ -189,6 +191,8 @@
   <ItemGroup>
     <ClInclude Include="Actor.h" />
     <ClInclude Include="AnimFSM.h" />
+    <ClInclude Include="AnimIdle.h" />
+    <ClInclude Include="AnimMove.h" />
     <ClInclude Include="Application2D.h" />
     <ClInclude Include="BaseMain.h" />
     <ClInclude Include="CameraOperator.h" />

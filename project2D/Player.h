@@ -8,6 +8,7 @@
 
 class Score;
 class Health;
+class AnimFSM;
 
 class Player :
 	public Actor
@@ -34,12 +35,16 @@ private:
 	Score*	m_pScore;
 	Health* m_pHealth;
 
+	AnimFSM* m_pAnimFSM;
+
 	float m_fXmin;
 	float m_fXmax;
 	float m_fYmin;
 	float m_fYmax;
 
 	float m_fFacing;
+
+	float m_fFrame = 0;
 
 	int m_nFish = 0;
 };

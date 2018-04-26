@@ -1,5 +1,8 @@
 #pragma once
 #include "Collider.h"
+
+class AnimFSM;
+
 class Enemy :
 	public Collider
 {
@@ -9,5 +12,11 @@ public:
 
 	void Update(float deltaTime);
 	void Draw();
+
+private:
+	AnimFSM* m_pAnimFSM;
+
+	float m_fFacing;
+	float m_fFrame = 0;
 };
 

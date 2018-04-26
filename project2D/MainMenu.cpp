@@ -30,7 +30,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 
 	m_nActors[EACTOR_CLOUDS]	= 2; //2;
 	m_nActors[EACTOR_WAVES]		= 1; //1;
-	m_nActors[EACTOR_ENEMY]		= 0; //3;
+	m_nActors[EACTOR_ENEMY]		= 3; //3;
 	m_nActors[EACTOR_FISH]		= 0; //3;
 
 	// UI Init
@@ -48,7 +48,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 	m_apUIElement[1] = new UIElement(pApp2D, pResMod, ECOLOUR_RED, pFont, UI_QUIT, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY - 100);
 
 	//DEBUG
-	m_pPlayer = new Player(pApp2D, pCamOp, pResMod, pTextures);
+	//m_pPlayer = new Player(pApp2D, pCamOp, pResMod, pTextures);
 
 	// Actor Init
 	m_apActor = new Actor**[EACTOR_TOTAL];
@@ -61,14 +61,14 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer->GetCurrentPos(), 1.0f - ((float)j/2), -150.0f * (float)j, 1.0f - (0.5f * (float)j), j);
+				m_apActor[i][j] = new Clouds(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pCamOp->GetDevCamPos(), 1.0f - ((float)j / 2), -150.0f * (float)j, 1.0f - (0.5f * (float)j), j);
 			}
 			break;
 		case EACTOR_WAVES:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer->GetCurrentPos());
+				m_apActor[i][j] = new Waves(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pCamOp->GetDevCamPos());
 			}
 			break;
 		case EACTOR_ENEMY:
@@ -90,6 +90,18 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 			printf("ERROR\n");
 			printf("MainMenu::Constructor, invalid Actor count\n");
 		}
+	}
+
+	// Enemy Positions
+	for (int i = 0; i < m_nActors[EACTOR_ENEMY]; ++i)
+	{
+		m_apActor[EACTOR_ENEMY][i]->SetStartPos(300 + (300 * i), 400 + (50 * i));
+	}
+
+	// Fish Positions
+	for (int i = 0; i < m_nActors[EACTOR_FISH]; ++i)
+	{
+
 	}
 }
 

@@ -1,29 +1,33 @@
 #include "AnimFSM.h"
 
+#include "AnimIdle.h"
+#include "AnimMove.h"
 
-
-AnimFSM::AnimFSM(bool bIsEnemy)
+AnimFSM::AnimFSM()
 {
-	m_bIsEnemy = bIsEnemy;
+	m_pAnimIdle = new AnimIdle();
+	m_pAnimMove = new AnimMove();
 }
 
 
 AnimFSM::~AnimFSM()
 {
+	delete m_pAnimMove;
+	delete m_pAnimIdle;
 }
 
 //---------------------------------------------------
 // returns the UV offset
 //---------------------------------------------------
-int AnimFSM::Update()
+float AnimFSM::Update()
 {
 	switch (m_eAnimState)
 	{
 	case EANIMSTATES_IDLE:
-		// return m_pAnimIdle->Update();
+		return m_pAnimIdle->Update();
 		break;
 	case EANIMSTATES_MOVE:
-		// return m_pAnimMove->Update();
+		return m_pAnimMove->Update();
 		break;
 	case EANIMSTATES_DIVE:
 		// return m_pAnimDive->Update();

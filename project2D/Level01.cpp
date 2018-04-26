@@ -15,7 +15,7 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-Level01::Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures) : MainLevel(pApp2D, pFont, pCapOp, pResMod, pTextures)
+Level01::Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : MainLevel(pApp2D, pFont, pCamOp, pResMod, pTextures)
 {
 }
 

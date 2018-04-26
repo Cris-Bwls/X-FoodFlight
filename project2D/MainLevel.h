@@ -12,16 +12,16 @@ class Application2D;
 class UIElement;
 class Actor;
 class Player;
+class ColliderController;
 
 class MainLevel :
 	public BaseMain
 {
 public:
-	MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCapOp, Resolution* pResMod, Textures* pTextures);
+	MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures);
 	virtual ~MainLevel();
 
 private:
-	LinkedList<Pos*>*	m_pListFish;
-	LinkedList<Pos*>*	m_pListEnemy;
+	ColliderController * m_pColliderController;
 };
 
