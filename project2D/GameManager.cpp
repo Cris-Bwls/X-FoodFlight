@@ -46,7 +46,7 @@ GameManager::GameManager(Application2D* pApp2D)
 	m_pTextures = new Textures;
 
 	m_pFont = new aie::Font(FONT_FILE, FONT_SIZE * m_pResMod->fY);
-	m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures);
+	m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this);
 }
 
 //----------------------------------------------------------
@@ -98,23 +98,23 @@ void GameManager::CheckResMod()
 //----------------------------------------------------------
 void GameManager::ChangeLevel()
 {
-	switch (eLevel)
+	switch (m_eLevel)
 	{
 	case ELEVEL_MAIN_MENU:
 		delete m_pLevel;
-		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures);
+		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this);
 		break;
 	case ELEVEL_LEVEL_01:
 		delete m_pLevel;	//CB:HERENOW
-		m_pLevel = new Level01(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures); //CB:DEBUG
+		m_pLevel = new Level01(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this); //CB:DEBUG
 		break;
 	case ELEVEL_LEVEL_02:
 		delete m_pLevel;
-		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures); //CB:DEBUG
+		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this); //CB:DEBUG
 		break;
 	case ELEVEL_LEVEL_ENDLESS:
 		delete m_pLevel;
-		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures); //CB:DEBUG
+		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this); //CB:DEBUG
 		break;
 	default:
 		//ERROR
@@ -130,6 +130,12 @@ void GameManager::Update(float deltaTime)
 {
 	CheckResMod();
 	m_pLevel->Update(deltaTime);
+	
+	if (m_pLevel->UpdateUI(m_eLevel))
+	{
+		ChangeLevel();
+		Update(deltaTime);
+	}
 
 	// Lastly update camera barrier
 	//m_pCamOp->UpdateBarrier();

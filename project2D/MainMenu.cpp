@@ -3,6 +3,7 @@
 //Higher
 #include <iostream>
 #include "Application2D.h"
+#include "GameManager.h"
 
 //Lower
 #include "UIElement.h"
@@ -24,8 +25,11 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures)
+MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures, pGame)
 {
+	// Reset Camera
+	pCamOp->ResetCamPos();
+
 	m_nUIElements = 2;
 
 	m_nActors[EACTOR_CLOUDS]	= 2; //2;
@@ -46,9 +50,6 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 
 	pFont->getStringSize(UI_QUIT, fWidth, fHeight);
 	m_apUIElement[1] = new UIElement(pApp2D, pResMod, ECOLOUR_RED, pFont, UI_QUIT, fWidth * 1.1, fHeight * 1.1, fPosX, fPosY - 100);
-
-	//DEBUG
-	//m_pPlayer = new Player(pApp2D, pCamOp, pResMod, pTextures);
 
 	// Actor Init
 	m_apActor = new Actor**[EACTOR_TOTAL];
@@ -127,8 +128,6 @@ MainMenu::~MainMenu()
 
 	delete[] m_apUIElement;
 	delete[] m_apActor;
-
-	delete m_pPlayer;
 }
 
 //----------------------------------------------------------
@@ -159,14 +158,20 @@ void MainMenu::Draw()
 //----------------------------------------------------------
 // UpdateUI
 //----------------------------------------------------------
-void MainMenu::UpdateUI(float deltaTime)
+bool MainMenu::UpdateUI(ELevel &eNewLevel)
 {
 	// Play
-	m_apUIElement[0]->Update();
+	if (m_apUIElement[0]->Update())
+	{
+		eNewLevel = (ELEVEL_LEVEL_01);
+		return true;
+	}
 
 	// Quit
 	if (m_apUIElement[1]->Update())
 	{
 		m_pApp2D->quit();
 	}
+
+	return false;
 }

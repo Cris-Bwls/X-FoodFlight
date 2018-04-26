@@ -34,6 +34,6 @@ private:
 	aie::Font*		m_pFont;
 	BaseMain*		m_pLevel;
 
-	ELevel eLevel;
+	ELevel m_eLevel;
 };
 

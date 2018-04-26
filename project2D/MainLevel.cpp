@@ -2,8 +2,10 @@
 
 //Higher
 #include "Application2D.h"
+#include "GameManager.h"
 
 //Lower
+#include "CameraOperator.h"
 #include "UIElement.h"
 #include "Actor.h"
 #include "Clouds.h"
@@ -19,9 +21,12 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures)
+MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures, pGame)
 {
-	m_nUIElements = 2;
+	// Reset Camera
+	pCamOp->ResetCamPos();
+
+	m_nUIElements = 1;
 
 	m_nActors[EACTOR_CLOUDS] = 2; //2;
 	m_nActors[EACTOR_WAVES] = 1; //1;
@@ -99,8 +104,42 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 }
 
 //----------------------------------------------------------
-// Constructor
+// Destructor
 //----------------------------------------------------------
 MainLevel::~MainLevel()
 {
+	for (int i = 0; i < m_nUIElements; ++i)
+	{
+		delete m_apUIElement[i];
+	}
+
+	for (int i = 0; i < EACTOR_TOTAL; ++i)
+	{
+		for (int j = 0; j < m_nActors[i]; ++j)
+		{
+			delete m_apActor[i][j];
+		}
+
+		delete[] m_apActor[i];
+	}
+
+	delete[] m_apUIElement;
+	delete[] m_apActor;
+
+	delete m_pPlayer;
+}
+
+//----------------------------------------------------------
+// UpdateUI
+//----------------------------------------------------------
+bool MainLevel::UpdateUI(ELevel &eNewLevel)
+{
+	// MainMenu
+	if (m_apUIElement[0]->Update())
+	{
+		eNewLevel = (ELEVEL_MAIN_MENU);
+		return true;
+	}
+
+	return false;
 }

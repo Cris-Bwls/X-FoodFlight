@@ -3,6 +3,7 @@
 //Higher
 #include "Application2D.h"
 #include "Textures.h"
+#include "GameManager.h"
 
 //Lower
 #include "UIElement.h"
@@ -17,11 +18,12 @@
 //----------------------------------------------------------
 // Constructor
 //----------------------------------------------------------
-BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures)
+BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame)
 {
 	m_pApp2D = pApp2D;
 	m_pCamOp = pCamOp;
 	m_pResMod = pResMod;
+	m_pGame = pGame;
 }
 
 //----------------------------------------------------------
@@ -40,9 +42,7 @@ void BaseMain::Update(float deltaTime)
 	{
 		m_pPlayer->Update(deltaTime);
 	}
-
-	UpdateUI(deltaTime);
-
+	
 	for (int i = 0; i < EACTOR_TOTAL; ++i)
 	{
 		for (int j = 0; j < m_nActors[i]; ++j)
@@ -70,7 +70,7 @@ void BaseMain::Draw()
 
 	for (int i = 0; i < EACTOR_TOTAL; ++i)
 	{
-		for (int j = 0; j < m_nActors[i]; ++i)
+		for (int j = 0; j < m_nActors[i]; ++j)
 		{
 			m_apActor[i][j]->Draw();
 		}

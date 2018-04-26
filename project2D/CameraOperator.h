@@ -22,6 +22,7 @@ public:
 	void ChangeRealCamPos();
 	void ChangeBarrier();
 
+	void ResetCamPos();
 
 private:
 	Application2D*	m_pApp2D;

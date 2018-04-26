@@ -101,3 +101,14 @@ void CameraOperator::ChangeBarrier()
 	m_pBarrier->fLeft = m_pDevCamPos->fX + fHalfResX - BARRIER_OFFSET;
 	m_pBarrier->fRight = m_pDevCamPos->fX + fHalfResX + BARRIER_OFFSET;
 }
+
+//----------------------------------------------------------
+// ResetCamPos
+//----------------------------------------------------------
+void CameraOperator::ResetCamPos()
+{
+	m_pDevCamPos->fX = 0.0f;
+	m_pDevCamPos->fY = 0.0f;
+
+	ChangeRealCamPos();
+}
