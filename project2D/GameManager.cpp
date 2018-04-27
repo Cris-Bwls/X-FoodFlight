@@ -105,7 +105,7 @@ void GameManager::ChangeLevel()
 		m_pLevel = new MainMenu(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this);
 		break;
 	case ELEVEL_LEVEL_01:
-		delete m_pLevel;	//CB:HERENOW
+		delete m_pLevel;	
 		m_pLevel = new Level01(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this); //CB:DEBUG
 		break;
 	case ELEVEL_LEVEL_02:

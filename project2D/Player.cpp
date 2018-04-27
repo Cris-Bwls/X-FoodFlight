@@ -30,6 +30,7 @@ Player::Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMo
 	m_pHealth = pHealth;
 
 	m_pAnimFSM = new AnimFSM;
+	m_fRadius = PLAYER_RADIUS;
 
 	// Player starts facing right
 	m_fFacing = -PLAYER_SIZE_X + 1;
@@ -45,6 +46,7 @@ Player::Player(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMo
 //----------------------------------------------------------
 Player::~Player()
 {
+	delete m_pAnimFSM;
 }
 
 //----------------------------------------------------------

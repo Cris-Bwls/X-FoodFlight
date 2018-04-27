@@ -16,6 +16,8 @@ Enemy::Enemy(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod,
 {
 	m_pTexture = pTextures->GetTexture(ETEXTURE_BIRD);
 
+	m_fRadius = ENEMY_RADIUS;
+
 	m_fFacing = -ENEMY_SIZE_X + 1;
 }
 
@@ -28,7 +30,7 @@ Enemy::~Enemy()
 
 void Enemy::Update(float deltaTime)
 {
-
+	Collision();
 }
 
 void Enemy::Draw()

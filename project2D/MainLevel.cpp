@@ -31,7 +31,7 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 	m_nActors[EACTOR_CLOUDS] = 2; //2;
 	m_nActors[EACTOR_WAVES] = 1; //1;
 	m_nActors[EACTOR_ENEMY] = 3; //3;
-	m_nActors[EACTOR_FISH] = 0; //3;
+	m_nActors[EACTOR_FISH] = 3; //3;
 
 								// UI Init
 	m_apUIElement = new UIElement*[m_nUIElements];
@@ -73,14 +73,14 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Enemy(m_pApp2D, m_pCamOp, pResMod, pTextures);
+				m_apActor[i][j] = new Enemy(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer);
 			}
 			break;
 		case EACTOR_FISH:
 			m_apActor[i] = new Actor*[m_nActors[i]];
 			for (int j = 0; j < m_nActors[i]; ++j)
 			{
-				m_apActor[i][j] = new Fish(m_pApp2D, m_pCamOp, pResMod, pTextures);
+				m_apActor[i][j] = new Fish(m_pApp2D, m_pCamOp, pResMod, pTextures, m_pPlayer);
 			}
 			break;
 		default:
@@ -99,7 +99,7 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 	// Fish Positions
 	for (int i = 0; i < m_nActors[EACTOR_FISH]; ++i)
 	{
-
+		m_apActor[EACTOR_FISH][i]->SetStartPos(300 + (300 * i), 50);
 	}
 }
 

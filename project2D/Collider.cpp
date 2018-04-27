@@ -1,5 +1,7 @@
 #include "Collider.h"
 
+#include<iostream>
+
 #include "Player.h"
 #include "CameraOperator.h"
 
@@ -37,15 +39,24 @@ bool Collider::Collision()
 		float fPlayerX;
 		float fPlayerY;
 		float fPlayerRadius;
-		m_pPlayer->GetPos(fPlayerX, fPlayerY, fPlayerY);
+		m_pPlayer->GetPos(fPlayerX, fPlayerY, fPlayerRadius);
 
-		fPlayerX += fPlayerRadius + m_fRadius;
-		fPlayerY += fPlayerRadius + m_fRadius;
+		float fPlayerLoX = fPlayerX - ((fPlayerRadius + m_fRadius) / 2);
+		float fPlayerHiX = fPlayerX + ((fPlayerRadius + m_fRadius) / 2);
+									  								  
+		float fPlayerLoY = fPlayerY - ((fPlayerRadius + m_fRadius) / 2);
+		float fPlayerHiY = fPlayerY + ((fPlayerRadius + m_fRadius) / 2);
 
-		if ((m_pCurrentPos->fX < fPlayerX) || (m_pCurrentPos->fX < fPlayerY))
-		{	// Collision
-			return true;
+		if ((m_pCurrentPos->fX > fPlayerLoX) && (m_pCurrentPos->fX < fPlayerHiX))
+		{
+			if ((m_pCurrentPos->fY > fPlayerLoY) && (m_pCurrentPos->fY < fPlayerHiY))
+			{
+				// Collision
+				printf("Collision!\n");
+				return true;
+			}
 		}
+
 	}
 	// No Collision
 	return false;
