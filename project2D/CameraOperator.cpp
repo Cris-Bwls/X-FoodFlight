@@ -6,6 +6,13 @@
 
 //----------------------------------------------------------
 // Constructor
+//
+//			pApp2D (Application2D*)
+//				pointer to App2D
+//			pDevRes (Resolution*)
+//				pointer to Developed Resolution
+//			pResMod (Resolution*)
+//				pointer to Resolution Modifier
 //----------------------------------------------------------
 CameraOperator::CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resolution* pResMod)
 {
@@ -19,9 +26,8 @@ CameraOperator::CameraOperator(Application2D* pApp2D, Resolution* pDevRes, Resol
 	m_pDevCamPos->fY = 0;
 	
 	m_pBarrier = new Barrier;
+	// Initialize barrier
 	ChangeBarrier();
-	//DEBUG
-	SetDevCamPosBounds(0, 2150);
 }
 
 //----------------------------------------------------------

@@ -3,6 +3,7 @@
 //Higher
 #include "Application2D.h"
 #include "GameManager.h"
+#include "CameraOperator.h"
 
 //Lower
 #include "UIElement.h"
@@ -18,6 +19,8 @@
 //----------------------------------------------------------
 Level01::Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame) : MainLevel(pApp2D, pFont, pCamOp, pResMod, pTextures, pGame)
 {
+	// Set Camera Bounds
+	pCamOp->SetDevCamPosBounds(0, 2150);
 }
 
 //----------------------------------------------------------

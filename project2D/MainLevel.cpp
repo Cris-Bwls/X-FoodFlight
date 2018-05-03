@@ -23,9 +23,6 @@
 //----------------------------------------------------------
 MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures, pGame)
 {
-	// Reset Camera
-	pCamOp->ResetCamPos();
-
 	m_nUIElements = 1;
 
 	m_nActors[EACTOR_CLOUDS] = 2; //2;
@@ -86,7 +83,8 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 		default:
 			//ERROR
 			printf("ERROR\n");
-			printf("MainMenu::Constructor, invalid Actor count\n");
+			printf("Mainlevel::Constructor, invalid Actor count\n");
+			std::getchar();
 		}
 	}
 

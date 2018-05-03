@@ -4,6 +4,7 @@
 #include "Application2D.h"
 #include "Textures.h"
 #include "GameManager.h"
+#include "CameraOperator.h"
 
 //Lower
 #include "UIElement.h"
@@ -24,6 +25,9 @@ BaseMain::BaseMain(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 	m_pCamOp = pCamOp;
 	m_pResMod = pResMod;
 	m_pGame = pGame;
+
+	// Reset Camera
+	pCamOp->ResetCamPos();
 }
 
 //----------------------------------------------------------

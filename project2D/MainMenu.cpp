@@ -27,8 +27,8 @@
 //----------------------------------------------------------
 MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures, pGame)
 {
-	// Reset Camera
-	pCamOp->ResetCamPos();
+	// Set Camera Bounds
+	pCamOp->SetDevCamPosBounds(0, 2150);
 
 	m_nUIElements = 2;
 
@@ -90,6 +90,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 			//ERROR
 			printf("ERROR\n");
 			printf("MainMenu::Constructor, invalid Actor count\n");
+			std::getchar();
 		}
 	}
 

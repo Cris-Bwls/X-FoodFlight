@@ -145,20 +145,28 @@ void UIElement::Draw()
 {
 	auto pRenderer = m_pApp2D->GetRenderer();
 
+	// Set Colour to draw Box
 	Colourizer(m_eColourBox);
+	// Draw Box
 	pRenderer->drawBox((m_fPosX * m_pResMod->fX) + m_pCamPos->fX, m_fPosY * m_pResMod->fY, m_fWidth * m_pResMod->fX, m_fHeight * m_pResMod->fY, 0.0f, m_fDepth + 1);
 
+	// Set Colour to draw Text
 	Colourizer(m_eColourText);
+	// Draw Text
 	pRenderer->drawText(m_pFont, m_sText, ((m_fPosX - (m_fWidth / 2)) * m_pResMod->fX) + m_pCamPos->fX, (m_fPosY - (m_fHeight / 2)) * m_pResMod->fY, m_fDepth);
 
 	// End of draw
-	// Set colour to white
+
+	// Set colour to default
 	pRenderer->setRenderColour(1, 1, 1);
 }
 
 //----------------------------------------------------------
 // Colourizer
 //		Changes colour of the element
+//
+//			eColour (EColour):
+//				Colour to change to
 //----------------------------------------------------------
 void UIElement::Colourizer(EColour eColour)
 {
@@ -183,5 +191,6 @@ void UIElement::Colourizer(EColour eColour)
 		//ERROR
 		printf("ERROR\n");
 		printf("UIElement::Colourizer, Invalid colour\n");
+		std::getchar();
 	}
 }

@@ -71,6 +71,7 @@ GameManager::~GameManager()
 //----------------------------------------------------------
 void GameManager::SetResMod()
 {
+	// Set Var
 	m_pResMod->fX = ((float)m_pApp2D->getWindowWidth() / DEV_RES_X);
 	m_pResMod->fY = ((float)m_pApp2D->getWindowHeight() / DEV_RES_Y);
 }
@@ -81,13 +82,17 @@ void GameManager::SetResMod()
 //----------------------------------------------------------
 void GameManager::CheckResMod()
 {
+	// Setup Var
 	float fX = m_pResMod->fX;
 	float fY = m_pResMod->fY;
 
+	// Reset ResMod incase window size has changed
 	SetResMod();
 
+	// IF ResMod has changed
 	if (fX != m_pResMod->fX || fY != m_pResMod->fY)
 	{
+		// Recreate font with new size
 		delete m_pFont;
 		m_pFont = new aie::Font(FONT_FILE, FONT_SIZE * m_pResMod->fY);
 	}
@@ -95,6 +100,7 @@ void GameManager::CheckResMod()
 
 //----------------------------------------------------------
 // ChangeLevel
+//		Change current Level
 //----------------------------------------------------------
 void GameManager::ChangeLevel()
 {
@@ -106,7 +112,7 @@ void GameManager::ChangeLevel()
 		break;
 	case ELEVEL_LEVEL_01:
 		delete m_pLevel;	
-		m_pLevel = new Level01(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this); //CB:DEBUG
+		m_pLevel = new Level01(m_pApp2D, m_pFont, m_pCamOp, m_pResMod, m_pTextures, this);
 		break;
 	case ELEVEL_LEVEL_02:
 		delete m_pLevel;
@@ -125,20 +131,26 @@ void GameManager::ChangeLevel()
 
 //----------------------------------------------------------
 // Update
+//
+//			deltaTime (float):
+//				change in time between update calls
 //----------------------------------------------------------
 void GameManager::Update(float deltaTime)
 {
+	// Check the Resolution Modifier
 	CheckResMod();
+
+	// Update the level
 	m_pLevel->Update(deltaTime);
 	
+	// If the UI is clicked to change the level
 	if (m_pLevel->UpdateUI(m_eLevel))
 	{
+		// Change the level
 		ChangeLevel();
+		// Perform Update again
 		Update(deltaTime);
 	}
-
-	// Lastly update camera barrier
-	//m_pCamOp->UpdateBarrier();
 }
 
 //----------------------------------------------------------
@@ -146,5 +158,6 @@ void GameManager::Update(float deltaTime)
 //----------------------------------------------------------
 void GameManager::Draw()
 {
+	// Call Levels Draw Func
 	m_pLevel->Draw();
 }
