@@ -1,5 +1,7 @@
 #include "Actor.h"
 
+#include "Debug.h"
+
 // Higher
 #include "Application2D.h"
 #include "CameraOperator.h"
@@ -9,9 +11,26 @@
 
 
 //----------------------------------------------------------
+// Constructor
+//
+//			pApp2D (Application2D*):
+//				pointer to Application2D
+//			pCamOp (CameraOperator*):
+//				pointer to CameraOperator
+//			pResMod (Resolution*):
+//				pointer to Resolution
+//			pTextures (Textures*):
+//				pointer to Textures
 //----------------------------------------------------------
 Actor::Actor(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures)
 {
+#ifdef DEBUG_MODE
+	assert(pApp2D);
+	assert(pCamOp);
+	assert(pResMod);
+	assert(pTextures);
+#endif // DEBUG_MODE
+
 	m_pApp2D = pApp2D;
 	m_pRenderer = m_pApp2D->GetRenderer();
 	m_pCamOp = pCamOp;
@@ -47,6 +66,10 @@ void Actor::SetIsDead(bool isDead)
 //----------------------------------------------------------
 void Actor::Move(float deltaTime)
 {
+#ifdef DEBUG_MODE
+	assert(m_pCurrentPos);
+#endif // DEBUG_MODE
+
 	m_pCurrentPos->fX += m_fSpeed * deltaTime;
 	m_pCurrentPos->fY += m_fSpeed * deltaTime;
 }
@@ -62,6 +85,11 @@ void Actor::Update(float deltaTime)
 //----------------------------------------------------------
 void Actor::SetStartPos(Pos* pPos)
 {
+#ifdef DEBUG_MODE
+	assert(m_pStartPos);
+	assert(m_pCurrentPos);
+#endif // DEBUG_MODE
+
 	*m_pStartPos = *pPos;
 
 	// Sets CurrentPos to StartPos
@@ -72,6 +100,11 @@ void Actor::SetStartPos(Pos* pPos)
 //----------------------------------------------------------
 void Actor::SetStartPos(float fX, float fY)
 {
+#ifdef DEBUG_MODE
+	assert(m_pStartPos);
+	assert(m_pCurrentPos);
+#endif // DEBUG_MODE
+
 	m_pStartPos->fX = fX;
 	m_pStartPos->fY = fY;
 
@@ -83,6 +116,10 @@ void Actor::SetStartPos(float fX, float fY)
 //----------------------------------------------------------
 Pos* Actor::GetStartPos()
 {
+#ifdef DEBUG_MODE
+	assert(m_pStartPos);
+#endif // DEBUG_MODE
+
 	return m_pStartPos;
 }
 
@@ -90,6 +127,10 @@ Pos* Actor::GetStartPos()
 //----------------------------------------------------------
 void Actor::GetStartPos(float &fX, float &fY)
 {
+#ifdef DEBUG_MODE
+	assert(m_pStartPos);
+#endif // DEBUG_MODE
+
 	fX = m_pStartPos->fX;
 	fY = m_pStartPos->fY;
 }
@@ -98,6 +139,10 @@ void Actor::GetStartPos(float &fX, float &fY)
 //----------------------------------------------------------
 Pos* Actor::GetCurrentPos()
 {
+#ifdef DEBUG_MODE
+	assert(m_pCurrentPos);
+#endif // DEBUG_MODE
+
 	return m_pCurrentPos;
 }
 
@@ -105,6 +150,10 @@ Pos* Actor::GetCurrentPos()
 //----------------------------------------------------------
 void Actor::GetCurrentPos(float &fX, float &fY)
 {
+#ifdef DEBUG_MODE
+	assert(m_pCurrentPos);
+#endif // DEBUG_MODE
+
 	fX = m_pCurrentPos->fX;
 	fY = m_pCurrentPos->fY;
 }

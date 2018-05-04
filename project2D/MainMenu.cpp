@@ -1,7 +1,8 @@
 #include "MainMenu.h"
 
 //Higher
-#include <iostream>
+#include "Debug.h"
+
 #include "Application2D.h"
 #include "GameManager.h"
 
@@ -24,9 +25,31 @@
 
 //----------------------------------------------------------
 // Constructor
+//		
+//			pApp2D (Application2D*):
+//				pointer to Application2D
+//			pFont (aie::Font*):
+//				pointer to Font
+//			pCamOp (CameraOperator*):
+//				pointer to CameraOperator
+//			pResMod (Resolution*):
+//				pointer to Resolution
+//			pTextures (Textures*):
+//				pointer to Textures
+//			pGame (GameManager*):
+//				pointer to GameManager
 //----------------------------------------------------------
 MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame) : BaseMain(pApp2D, pFont, pCamOp, pResMod, pTextures, pGame)
 {
+#ifdef DEBUG_MODE
+	assert(pApp2D);
+	assert(pFont);
+	assert(pCamOp);
+	assert(pResMod);
+	assert(pTextures);
+	assert(pGame);
+#endif // DEBUG_MODE
+
 	// Set Camera Bounds
 	pCamOp->SetDevCamPosBounds(0, 2150);
 
@@ -35,7 +58,7 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 	m_nActors[EACTOR_CLOUDS]	= 2; //2;
 	m_nActors[EACTOR_WAVES]		= 1; //1;
 	m_nActors[EACTOR_ENEMY]		= 3; //3;
-	m_nActors[EACTOR_FISH]		= 0; //3;
+	m_nActors[EACTOR_FISH]		= 3; //3;
 
 	// UI Init
 	m_apUIElement = new UIElement*[m_nUIElements];
@@ -98,12 +121,14 @@ MainMenu::MainMenu(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCam
 	for (int i = 0; i < m_nActors[EACTOR_ENEMY]; ++i)
 	{
 		m_apActor[EACTOR_ENEMY][i]->SetStartPos(300 + (300 * i), 400 + (50 * i));
+		m_apActor[EACTOR_ENEMY][i]->SetIsDead(false);
 	}
 
 	// Fish Positions
 	for (int i = 0; i < m_nActors[EACTOR_FISH]; ++i)
 	{
-
+		m_apActor[EACTOR_FISH][i]->SetStartPos(300 + (300 * i), 50);
+		m_apActor[EACTOR_FISH][i]->SetIsDead(false);
 	}
 }
 
@@ -136,21 +161,30 @@ MainMenu::~MainMenu()
 //----------------------------------------------------------
 void MainMenu::Draw()
 {
-	//DEBUG
-	if (m_pPlayer != nullptr)
-	{
-		m_pPlayer->Draw();
-	}
+#ifdef DEBUG_MODE
+	assert(m_apUIElement);
+	assert(m_apActor);
+#endif // DEBUG_MODE
 
+	// Draw UI Elements
 	for (int i = 0; i < m_nUIElements; ++i)
 	{
+#ifdef DEBUG_MODE
+		assert(m_apUIElement[i]);
+#endif // DEBUG_MODE
+
 		m_apUIElement[i]->Draw();
 	}
 
+	// Draw Actors
 	for (int i = 0; i < EACTOR_TOTAL; ++i)
 	{
 		for (int j = 0; j < m_nActors[i]; ++j)
 		{
+#ifdef DEBUG_MODE
+			assert(m_apActor[i][j]);
+#endif // DEBUG_MODE
+
 			m_apActor[i][j]->Draw();
 		}
 	}
@@ -158,21 +192,40 @@ void MainMenu::Draw()
 
 //----------------------------------------------------------
 // UpdateUI
+//		Updates UI Elements
+//		
+//			&eNewLevel (ELevel): (out)
+//				reference to the new level
+//
+//			return (bool):
+//				true if level has changed
 //----------------------------------------------------------
 bool MainMenu::UpdateUI(ELevel &eNewLevel)
 {
+#ifdef DEBUG_MODE
+	assert(m_apUIElement);
+	assert(m_apUIElement[0]);
+	assert(m_apUIElement[1]);
+#endif // DEBUG_MODE
+
 	// Play
+	// IF UI element pressed
 	if (m_apUIElement[0]->Update())
 	{
+		// Set New Level
 		eNewLevel = (ELEVEL_LEVEL_01);
+		// Level changed
 		return true;
 	}
 
 	// Quit
+	// IF UI element pressed
 	if (m_apUIElement[1]->Update())
 	{
+		// Quit
 		m_pApp2D->quit();
 	}
 
+	// Level NOT changed
 	return false;
 }

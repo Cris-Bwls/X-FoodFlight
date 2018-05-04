@@ -171,7 +171,7 @@
     <ClCompile Include="CameraOperator.cpp" />
     <ClCompile Include="Clouds.cpp" />
     <ClCompile Include="Collider.cpp" />
-    <ClCompile Include="ColliderController.cpp" />
+    <ClCompile Include="ColliderPosController.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Environ.cpp" />
     <ClCompile Include="Fish.cpp" />
@@ -198,7 +198,8 @@
     <ClInclude Include="CameraOperator.h" />
     <ClInclude Include="Clouds.h" />
     <ClInclude Include="Collider.h" />
-    <ClInclude Include="ColliderController.h" />
+    <ClInclude Include="ColliderPosController.h" />
+    <ClInclude Include="Debug.h" />
     <ClInclude Include="DeQue.h" />
     <ClInclude Include="DynamicArray.h" />
     <ClInclude Include="Enemy.h" />

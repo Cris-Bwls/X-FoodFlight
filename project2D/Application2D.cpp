@@ -1,5 +1,7 @@
 #include "Application2D.h"
 
+#include "Debug.h"
+
 // Higher
 #include "Input.h"
 
@@ -67,6 +69,10 @@ void Application2D::shutdown()
 //----------------------------------------------------------
 void Application2D::update(float deltaTime) 
 {
+#ifdef DEBUG_MODE
+	assert(aie::Input::getInstance);
+	assert(m_pGame);
+#endif // DEBUG_MODE
 
 	m_timer += deltaTime;
 
@@ -86,6 +92,12 @@ void Application2D::update(float deltaTime)
 //----------------------------------------------------------
 void Application2D::draw()
 {
+#ifdef DEBUG_MODE
+	assert(m_pRenderer2D);
+	assert(m_pCamPos);
+	assert(m_pGame);
+#endif // DEBUG_MODE
+
 	// set background colour
 	setBackgroundColour(BACKGROUND_COLOUR);
 
@@ -107,6 +119,10 @@ void Application2D::draw()
 //----------------------------------------------------------
 void Application2D::SetRes()
 {
+#ifdef DEBUG_MODE
+	assert(m_pRes);
+#endif // DEBUG_MODE
+
 	//CB:DEBUG
 	m_pRes->fX = RES_X;
 	m_pRes->fY = RES_Y;
@@ -124,6 +140,10 @@ void Application2D::SetRes()
 //----------------------------------------------------------
 void Application2D::SetCameraPos(float fX, float fY)
 {
+#ifdef DEBUG_MODE
+	assert(m_pCamPos);
+#endif // DEBUG_MODE
+
 	m_pCamPos->fX = fX;
 	m_pCamPos->fY = fY;
 }
@@ -137,6 +157,11 @@ void Application2D::SetCameraPos(float fX, float fY)
 //----------------------------------------------------------
 void Application2D::SetCameraPos(Pos* pCamPos)
 {
+#ifdef DEBUG_MODE
+	assert(pCamPos);
+	assert(m_pCamPos);
+#endif // DEBUG_MODE
+
 	*m_pCamPos = *pCamPos;
 }
 
@@ -149,6 +174,10 @@ void Application2D::SetCameraPos(Pos* pCamPos)
 //----------------------------------------------------------
 aie::Renderer2D* Application2D::GetRenderer()
 {
+#ifdef DEBUG_MODE
+	assert(m_pRenderer2D);
+#endif // DEBUG_MODE
+
 	return m_pRenderer2D;
 }
 
@@ -165,6 +194,10 @@ aie::Renderer2D* Application2D::GetRenderer()
 //----------------------------------------------------------
 void Application2D::GetRes(float &fX, float &fY, bool &bIsFullscreen)
 {
+#ifdef DEBUG_MODE
+	assert(m_pRes);
+#endif // DEBUG_MODE
+
 	fX = m_pRes->fX;
 	fY = m_pRes->fY;
 	bIsFullscreen = m_pRes->bIsFullscreen;
@@ -181,6 +214,10 @@ void Application2D::GetRes(float &fX, float &fY, bool &bIsFullscreen)
 //----------------------------------------------------------
 void Application2D::GetCameraPos(float &fX, float &fY)
 {
+#ifdef DEBUG_MODE
+	assert(m_pCamPos);
+#endif // DEBUG_MODE
+
 	fX = m_pCamPos->fX;
 	fY = m_pCamPos->fY;
 }
@@ -194,6 +231,10 @@ void Application2D::GetCameraPos(float &fX, float &fY)
 //----------------------------------------------------------
 Pos* Application2D::GetCameraPos()
 {
+#ifdef DEBUG_MODE
+	assert(m_pCamPos);
+#endif // DEBUG_MODE
+
 	return m_pCamPos;
 }
 

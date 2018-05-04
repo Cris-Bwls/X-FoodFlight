@@ -1,5 +1,7 @@
 #include "Clouds.h"
 
+#include "Debug.h"
+
 // Higher
 #include "Application2D.h"
 #include "Textures.h"
@@ -21,10 +23,39 @@
 
 //----------------------------------------------------------
 // Constructor
-//		Negative heightoffset is closer to the bottom, zero is top of screen
+//
+//			pApp2D (Application2D*):
+//				pointer to Application2D
+//			pCamOp (CameraOperator*):
+//				pointer to CameraOperator
+//			pResMod (Resolution*):
+//				pointer to Resolution
+//			pTextures (Textures*):
+//				pointer to Textures
+//			pReferencePos (Pos*):
+//				pointer to Reference Position
+//			fSpeed (float):
+//				speed of clouds
+//			fHeightOffset (float):
+//				Height Offset of clouds
+//			fScale (float):
+//				Scale of clouds
+//			fDepth (float):
+//				depth of clouds 
+//					(Negative heightoffset is closer to the bottom, 
+//					zero is top of screen)
 //----------------------------------------------------------
 Clouds::Clouds(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, Pos* pReferencePos, float fSpeed, float fHeightOffset, float fScale, float fDepth) : Environ(pApp2D, pCamOp, pResMod, pTextures, pReferencePos)
 {
+#ifdef DEBUG_MODE
+	assert(pApp2D);
+	assert(pCamOp);
+	assert(pResMod);
+	assert(pTextures);
+	assert(pReferencePos);
+	assert(m_pStartPos);
+#endif // DEBUG_MODE
+
 	m_pTexture = pTextures->GetTexture(ETEXTURE_CLOUD1);
 	m_pTexture1 = pTextures->GetTexture(ETEXTURE_CLOUD2);
 	m_pTexture2 = pTextures->GetTexture(ETEXTURE_CLOUD3);
@@ -59,6 +90,12 @@ Clouds::~Clouds()
 //----------------------------------------------------------
 void Clouds::Update(float deltaTime)
 {
+#ifdef DEBUG_MODE
+	assert(m_pStartPos);
+	assert(m_pCurrentPos);
+	assert(m_pCamOp);
+#endif // DEBUG_MODE
+
 	if (m_pStartPos->fX > m_pCurrentPos->fX)
 	{
 		m_pCurrentPos->fX = m_pStartPos->fX + m_pCamOp->GetDevRes()->fX;
@@ -75,6 +112,13 @@ void Clouds::Update(float deltaTime)
 //----------------------------------------------------------
 void Clouds::Draw()
 {
+#ifdef DEBUG_MODE
+	assert(m_pCurrentPos);
+	assert(m_pCamOp);
+	assert(m_pTexture3);
+	assert(m_pResMod);
+#endif // DEBUG_MODE
+
 	float fPosX = m_pCurrentPos->fX;
 	float fDevX = m_pCamOp->GetDevRes()->fX;
 	

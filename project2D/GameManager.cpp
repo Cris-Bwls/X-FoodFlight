@@ -1,5 +1,6 @@
 #include "GameManager.h"
-#include <iostream>
+
+#include "Debug.h"
 
 // Higher
 #include "Application2D.h"
@@ -31,6 +32,10 @@
 //----------------------------------------------------------
 GameManager::GameManager(Application2D* pApp2D)
 {
+#ifdef DEBUG_MODE
+	assert(pApp2D);
+#endif // DEBUG_MODE
+
 	m_pApp2D = pApp2D;
 
 	m_pDevRes = new Resolution;
@@ -71,6 +76,11 @@ GameManager::~GameManager()
 //----------------------------------------------------------
 void GameManager::SetResMod()
 {
+#ifdef DEBUG_MODE
+	assert(m_pApp2D);
+	assert(m_pResMod);
+#endif // DEBUG_MODE
+
 	// Set Var
 	m_pResMod->fX = ((float)m_pApp2D->getWindowWidth() / DEV_RES_X);
 	m_pResMod->fY = ((float)m_pApp2D->getWindowHeight() / DEV_RES_Y);
@@ -82,6 +92,12 @@ void GameManager::SetResMod()
 //----------------------------------------------------------
 void GameManager::CheckResMod()
 {
+#ifdef DEBUG_MODE
+	assert(m_pApp2D);
+	assert(m_pResMod);
+	assert(m_pFont);
+#endif // DEBUG_MODE
+
 	// Setup Var
 	float fX = m_pResMod->fX;
 	float fY = m_pResMod->fY;
@@ -104,6 +120,14 @@ void GameManager::CheckResMod()
 //----------------------------------------------------------
 void GameManager::ChangeLevel()
 {
+#ifdef DEBUG_MODE
+	assert(m_pApp2D);
+	assert(m_pFont);
+	assert(m_pCamOp);
+	assert(m_pResMod);
+	assert(m_pTextures);
+#endif // DEBUG_MODE
+
 	switch (m_eLevel)
 	{
 	case ELEVEL_MAIN_MENU:
@@ -126,6 +150,9 @@ void GameManager::ChangeLevel()
 		//ERROR
 		printf("ERROR\n");
 		printf("GameManager::ChangeLevel, Invalid Level\n");
+		std::getchar();
+
+		assert(!"Invalid Level, Can NOT Load Level, Can NOT continue");
 	}
 }
 
@@ -137,6 +164,8 @@ void GameManager::ChangeLevel()
 //----------------------------------------------------------
 void GameManager::Update(float deltaTime)
 {
+	assert(m_pLevel && "Can NOT load Level, Can NOT continue");
+
 	// Check the Resolution Modifier
 	CheckResMod();
 
@@ -158,6 +187,8 @@ void GameManager::Update(float deltaTime)
 //----------------------------------------------------------
 void GameManager::Draw()
 {
+	assert(m_pLevel && "Can NOT load Level, Can NOT continue");
+
 	// Call Levels Draw Func
 	m_pLevel->Draw();
 }

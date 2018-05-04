@@ -1,5 +1,7 @@
 #include "StaticSprite.h"
 
+#include "Debug.h"
+
 #include "Application2D.h"
 #include "CameraOperator.h"
 #include "Textures.h"
@@ -9,6 +11,14 @@
 //----------------------------------------------------------
 StaticSprite::StaticSprite(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, ETexture eTexture, Pos* pPos, float fDepth)
 {
+#ifdef DEBUG_MODE
+	assert(pApp2D);
+	assert(pCamOp);
+	assert(pResMod);
+	assert(pTextures);
+	assert(pPos);
+#endif // DEBUG_MODE
+
 	// Store pointers
 	m_pApp2D = pApp2D;
 	m_pCamOp = pCamOp;
@@ -44,6 +54,13 @@ void StaticSprite::Update()
 //----------------------------------------------------------
 void StaticSprite::Draw()
 {
+#ifdef DEBUG_MODE
+	assert(m_pResMod);
+	assert(m_pApp2D);
+	assert(m_pTexture);
+	assert(m_pPos);
+#endif // DEBUG_MODE
+
 	// IF Visible
 	if (m_bIsVisible)
 	{
@@ -64,6 +81,11 @@ void StaticSprite::Draw()
 //----------------------------------------------------------
 void StaticSprite::CheckIsVisible()
 {
+#ifdef DEBUG_MODE
+	assert(m_pCamOp);
+	assert(m_pPos);
+#endif // DEBUG_MODE
+
 	// Setup Var
 	float fOffset = 100.0f;
 	float fCamPosX = m_pCamOp->GetDevCamPos()->fX;
@@ -98,6 +120,7 @@ void StaticSprite::CheckIsVisible()
 //----------------------------------------------------------
 void StaticSprite::ChangeSize(float fHeight, float fWidth, float fHeightOffset, float fWidthOffset)
 {
+
 	// Change Height
 
 	// IF new height is not zero
@@ -140,6 +163,11 @@ void StaticSprite::ChangeSize(float fHeight, float fWidth, float fHeightOffset, 
 //----------------------------------------------------------
 void StaticSprite::ChangePos(Pos* pPos, float fRotation)
 {
+#ifdef DEBUG_MODE
+	assert(pPos);
+	assert(m_pPos);
+#endif // DEBUG_MODE
+
 	*m_pPos = *pPos;
 	m_fRotation = fRotation;
 }
@@ -157,6 +185,10 @@ void StaticSprite::ChangePos(Pos* pPos, float fRotation)
 //----------------------------------------------------------
 void StaticSprite::ChangePos(float fX, float fY, float fRotation)
 {
+#ifdef DEBUG_MODE
+	assert(m_pPos);
+#endif // DEBUG_MODE
+
 	// Store Var
 	m_pPos->fX = fX;
 	m_pPos->fY = fY;

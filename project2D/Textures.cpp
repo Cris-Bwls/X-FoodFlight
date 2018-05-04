@@ -1,13 +1,18 @@
 #include "Textures.h"
 
-#include <iostream>
+#include "Debug.h"
 
+//----------------------------------------------------------
+// Constructor
+//----------------------------------------------------------
 Textures::Textures()
 {
 	m_apTexture = new aie::Texture*[ETEXTURE_TOTAL];
 
+	// FOR all textures
 	for (int i = 0; i < ETEXTURE_TOTAL; ++i)
 	{
+		// Create an instance of the texture
 		switch (i)
 		{
 		case ETEXTURE_BIRD:
@@ -41,12 +46,17 @@ Textures::Textures()
 			//ERROR
 			printf("ERROR\n");
 			printf("Textures::Constructor, Invalid Texture\n");
+			std::getchar();
+
+			assert(!"Invalid Texture, Can NOT load Texture, Can NOT continue");
 		}
 
 	}
 }
 
-
+//----------------------------------------------------------
+// Destructor
+//----------------------------------------------------------
 Textures::~Textures()
 {
 	for (int i = 0; i < ETEXTURE_TOTAL; ++i)
@@ -56,11 +66,21 @@ Textures::~Textures()
 	delete[] m_apTexture;
 }
 
-
+//----------------------------------------------------------
+// GetTexture
+//		Gets Texture thats asked for
+//
+//			eTexture (ETexture):
+//				texture to get
+//
+//			return (aie::Texture*)
+//				texture chosen
+//----------------------------------------------------------
 aie::Texture* Textures::GetTexture(ETexture eTexture)
 {
 	if (eTexture < ETEXTURE_TOTAL)
 	{
+		assert(!(m_apTexture[eTexture] == nullptr) && "No NOT load Texture, Can NOT continue");
 		return m_apTexture[eTexture];
 	}
 	else
@@ -68,5 +88,8 @@ aie::Texture* Textures::GetTexture(ETexture eTexture)
 		//ERROR
 		printf("ERROR\n");
 		printf("Textures::GetTexture, Invalid Texture\n");
+		std::getchar();
+
+		assert(!"Invalid Texture, Can NOT load Texture, Can NOT continue");
 	}
 }

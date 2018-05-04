@@ -1,6 +1,7 @@
 #include "UIElement.h"
 
-#include <iostream>
+#include "Debug.h"
+
 #include "Application2D.h"
 
 
@@ -30,6 +31,12 @@
 //----------------------------------------------------------
 UIElement::UIElement(Application2D* pApp2D, Resolution* pResMod, EColour eColour, aie::Font* pFont, const char* sText, float fWidth, float fHeight, float fPosX, float fPosY, float fDepth)
 {
+#ifdef DEBUG_MODE
+	assert(pApp2D);
+	assert(pResMod);
+	assert(pFont);
+#endif // DEBUG_MODE
+
 	m_pApp2D	 = pApp2D;
 	m_pResMod	 = pResMod;
 	m_eColourBox = eColour;
@@ -91,6 +98,11 @@ void UIElement::ChangePos(float fPosX, float fPosY, float fOffsetX, float fOffse
 //----------------------------------------------------------
 bool UIElement::Update()
 {
+#ifdef DEBUG_MODE
+	assert(aie::Input::getInstance());
+	assert(m_pResMod);
+#endif // DEBUG_MODE
+
 	aie::Input* input = aie::Input::getInstance();
 	int nMouseX, nMouseY;
 	input->getMouseXY(&nMouseX, &nMouseY);
@@ -143,6 +155,13 @@ bool UIElement::Update()
 //----------------------------------------------------------
 void UIElement::Draw()
 {
+#ifdef DEBUG_MODE
+	assert(m_pApp2D);
+	assert(m_pResMod);
+	assert(m_pFont);
+	assert(m_pCamPos);
+#endif // DEBUG_MODE
+
 	auto pRenderer = m_pApp2D->GetRenderer();
 
 	// Set Colour to draw Box
@@ -170,6 +189,10 @@ void UIElement::Draw()
 //----------------------------------------------------------
 void UIElement::Colourizer(EColour eColour)
 {
+#ifdef DEBUG_MODE
+	assert(m_pApp2D);
+#endif // DEBUG_MODE
+
 	switch (eColour)
 	{
 	case ECOLOUR_RED:

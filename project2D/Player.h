@@ -41,6 +41,7 @@ private:
 	float m_fXmax;
 	float m_fYmin;
 	float m_fYmax;
+	float m_fYmaxInit;
 
 	float m_fFacing;
 
