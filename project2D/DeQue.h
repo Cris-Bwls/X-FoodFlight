@@ -38,7 +38,7 @@ public:
 
 	bool Empty()
 	{
-		return (data.m_nListSize == 0);
+		return (data.Size() == 0);
 	}
 
 	T ReadBack()

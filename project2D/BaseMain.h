@@ -36,6 +36,7 @@ protected:
 	Actor***		 m_apActor;
 	Player*			 m_pPlayer = nullptr;
 
+
 	int m_nUIElements = 1;
 
 	int m_nActors[EACTOR_TOTAL];

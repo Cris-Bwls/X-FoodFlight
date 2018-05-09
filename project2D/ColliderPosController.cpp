@@ -42,6 +42,8 @@ ColliderPosController::ColliderPosController(CameraOperator* pCamOp, Player* pPl
 //----------------------------------------------------------
 ColliderPosController::~ColliderPosController()
 {
+	m_dqListPos.Empty();
+	m_llPos.Clear();
 }
 
 //----------------------------------------------------------

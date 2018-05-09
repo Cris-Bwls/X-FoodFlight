@@ -15,6 +15,7 @@
 #include "Enemy.h"
 #include "Fish.h"
 #include "Player.h"
+#include "ColliderPosController.h"
 
 //----------------------------------------------------------
 // Constructor
@@ -52,4 +53,38 @@ Level01::Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp
 //----------------------------------------------------------
 Level01::~Level01()
 {
+}
+
+//----------------------------------------------------------
+// Update
+//----------------------------------------------------------
+void Level01::Update(float deltaTime)
+{
+#ifdef DEBUG_MODE
+	assert(m_apActor);
+#endif // DEBUG_MODE
+
+	// IF player exists
+	if (m_pPlayer != nullptr)
+	{
+		// Update player
+		m_pPlayer->Update(deltaTime);
+	}
+
+	// Update Position Controllers
+	m_pEnemyPositions->Update();
+	m_pFishPositions->Update();
+
+	// Update Actors
+	for (int i = 0; i < EACTOR_TOTAL; ++i)
+	{
+		for (int j = 0; j < m_nActors[i]; ++j)
+		{
+#ifdef DEBUG_MODE
+			assert(m_apActor[i][j]);
+#endif // DEBUG_MODE
+
+			m_apActor[i][j]->Update(deltaTime);
+		}
+	}
 }

@@ -111,16 +111,23 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 		}
 	}
 
-	// Enemy Positions
-	for (int i = 0; i < m_nActors[EACTOR_ENEMY]; ++i)
+	// Enemy Position Init
+	m_pEnemyPositions = new ColliderPosController(pCamOp, m_pPlayer, (Collider**)m_apActor[EACTOR_ENEMY], m_nActors[EACTOR_ENEMY]);
 	{
-		m_apActor[EACTOR_ENEMY][i]->SetStartPos(300 + (300 * i), 400 + (50 * i));
-	}
+		Pos* tempPos = new Pos();
+		tempPos->fX = 300.0f;
+		tempPos->fY = 400.0f;
 
-	// Fish Positions
-	for (int i = 0; i < m_nActors[EACTOR_FISH]; ++i)
+		m_pEnemyPositions->GetPosList()->PushBack(tempPos);
+	}
+	// Fish Position Init
+	m_pFishPositions = new ColliderPosController(pCamOp, m_pPlayer, (Collider**)m_apActor[EACTOR_FISH], m_nActors[EACTOR_FISH]);
 	{
-		m_apActor[EACTOR_FISH][i]->SetStartPos(300 + (300 * i), 50);
+		Pos* tempPos = new Pos();
+		tempPos->fX = 300.0f;
+		tempPos->fY = 400.0f;
+
+		m_pFishPositions->GetPosList()->PushBack(tempPos);
 	}
 }
 

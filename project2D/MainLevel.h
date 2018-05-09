@@ -13,7 +13,7 @@ class Application2D;
 class UIElement;
 class Actor;
 class Player;
-class ColliderController;
+class ColliderPosController;
 
 class MainLevel :
 	public BaseMain
@@ -24,7 +24,8 @@ public:
 
 	bool UpdateUI(ELevel &eNewLevel);
 
-private:
-	ColliderController * m_pColliderController;
+protected:
+	ColliderPosController*	m_pEnemyPositions;
+	ColliderPosController*	m_pFishPositions;
 };
 
