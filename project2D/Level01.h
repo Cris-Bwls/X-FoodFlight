@@ -18,6 +18,6 @@ public:
 	Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame);
 	~Level01();
 
-	void Update(float deltaTime);
+	void AddPositions();
 };
 

@@ -17,6 +17,8 @@
 #include "Player.h"
 #include "ColliderPosController.h"
 
+#define OFFSET 1000
+
 //----------------------------------------------------------
 // Constructor
 //
@@ -45,7 +47,8 @@ Level01::Level01(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp
 #endif // DEBUG_MODE
 
 	// Set Camera Bounds
-	pCamOp->SetDevCamPosBounds(0, 2150);
+	pCamOp->SetDevCamPosBounds(0, FLT_MAX);
+	m_pPlayer->SetBoundaries(150, FLT_MAX);
 }
 
 //----------------------------------------------------------
@@ -56,35 +59,34 @@ Level01::~Level01()
 }
 
 //----------------------------------------------------------
-// Update
+// AddPositions
 //----------------------------------------------------------
-void Level01::Update(float deltaTime)
+void Level01::AddPositions()
 {
-#ifdef DEBUG_MODE
-	assert(m_apActor);
-#endif // DEBUG_MODE
+	float fPlayerXPos = m_pPlayer->GetCurrentPos()->fX;
+	float fTempX;
 
-	// IF player exists
-	if (m_pPlayer != nullptr)
+	// Add to Enemy Positions
+	auto end = m_pEnemyPositions->GetPosList()->GetEnd();
+	while (fPlayerXPos > end->m_pPrev->m_data->fX - OFFSET)
 	{
-		// Update player
-		m_pPlayer->Update(deltaTime);
+		fTempX = end->m_pPrev->m_data->fX;
+		auto tempPos = new Pos;
+		tempPos->fX = fTempX + 300;
+		tempPos->fY = 400;
+
+		m_pEnemyPositions->GetPosList()->PushBack(tempPos);
 	}
 
-	// Update Position Controllers
-	m_pEnemyPositions->Update();
-	m_pFishPositions->Update();
-
-	// Update Actors
-	for (int i = 0; i < EACTOR_TOTAL; ++i)
+	// Add to Fish Positions
+	end = m_pFishPositions->GetPosList()->GetEnd();
+	while (fPlayerXPos > end->m_pPrev->m_data->fX - OFFSET)
 	{
-		for (int j = 0; j < m_nActors[i]; ++j)
-		{
-#ifdef DEBUG_MODE
-			assert(m_apActor[i][j]);
-#endif // DEBUG_MODE
+		fTempX = end->m_pPrev->m_data->fX;
+		auto tempPos = new Pos;
+		tempPos->fX = fTempX + 300;
+		tempPos->fY = 50;
 
-			m_apActor[i][j]->Update(deltaTime);
-		}
+		m_pFishPositions->GetPosList()->PushBack(tempPos);
 	}
 }

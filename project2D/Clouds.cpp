@@ -66,7 +66,7 @@ Clouds::Clouds(Application2D* pApp2D, CameraOperator* pCamOp, Resolution* pResMo
 	m_fScale = fScale;
 	m_fDepth = 50 + fDepth;
 
-	*m_pStartPos = *pReferencePos;
+	m_pReferencePos = pReferencePos;
 
 	m_fPosX[0] = -300.0f;
 	m_fPosX[1] = -100.0f;
@@ -96,9 +96,9 @@ void Clouds::Update(float deltaTime)
 	assert(m_pCamOp);
 #endif // DEBUG_MODE
 
-	if (m_pStartPos->fX > m_pCurrentPos->fX)
+	if (m_pReferencePos->fX > m_pCurrentPos->fX)
 	{
-		m_pCurrentPos->fX = m_pStartPos->fX + m_pCamOp->GetDevRes()->fX;
+		m_pCurrentPos->fX = m_pReferencePos->fX + m_pCamOp->GetDevRes()->fX;
 	}
 	else
 	{

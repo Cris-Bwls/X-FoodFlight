@@ -17,6 +17,8 @@ private:
 	aie::Texture* m_pTexture2;
 	aie::Texture* m_pTexture3;
 
+	Pos* m_pReferencePos;
+
 	float m_fSpeed;
 	float m_fHeight;
 	float m_fScale;

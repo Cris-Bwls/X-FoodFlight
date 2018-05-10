@@ -18,7 +18,7 @@ public:
 	virtual ~Actor();
 
 	void SetIsVisible(bool isVisible);
-	void SetIsDead(bool isDead);
+	void SetIsDead(bool isDead = true);
 
 	virtual void Move(float deltaTime);
 
@@ -33,6 +33,8 @@ public:
 
 	Pos* GetCurrentPos();
 	void GetCurrentPos(float &fX, float &fY);
+
+	bool GetIsDead();
 	
 protected:
 	Application2D*	 m_pApp2D = nullptr;

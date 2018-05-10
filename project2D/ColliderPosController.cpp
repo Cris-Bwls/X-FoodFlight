@@ -25,6 +25,9 @@ ColliderPosController::ColliderPosController(CameraOperator* pCamOp, Player* pPl
 	assert(pPlayer);
 	assert(pCamOp);
 #endif // DEBUG_MODE
+	m_pLLPos		= new LinkedList<Pos*>;
+	m_pDQListPos	= new DeQue<LinkedListNode<Pos*>*>;
+
 
 	m_apCollider = apCollider;
 	m_fDevResX = pCamOp->GetDevRes()->fX;
@@ -42,8 +45,8 @@ ColliderPosController::ColliderPosController(CameraOperator* pCamOp, Player* pPl
 //----------------------------------------------------------
 ColliderPosController::~ColliderPosController()
 {
-	m_dqListPos.Empty();
-	m_llPos.Clear();
+	delete m_pLLPos;
+	delete m_pDQListPos;
 }
 
 //----------------------------------------------------------
@@ -59,6 +62,8 @@ void ColliderPosController::Update()
 //		Checks to see if ends are in range
 //			if too far beyond POP
 //			if in range PUSH next
+//
+//		Must have run StartDeQue
 //----------------------------------------------------------
 void ColliderPosController::CheckEnds()
 {
@@ -71,49 +76,65 @@ void ColliderPosController::CheckEnds()
 	// WHILE !hasFirst
 	while (!m_bHasFirst)
 	{
-		// IF prev NOT start sentinel && pos of DeQue first in window
-		if ( (m_dqListPos.ReadFront()->m_pPrev != m_llPos.GetStart() ) && ( m_dqListPos.ReadFront()->m_data->fX > (m_pPlayerPos->fX - m_fDevResX) ) )
+		if (m_pDQListPos->ReadFront()->m_data)
 		{
-			// pushFront prev pointer to DeQue
-			m_dqListPos.PushFront(m_dqListPos.ReadFront()->m_pPrev);
-
-			m_bFoundCollider = false;
-			m_nIterator = 0;
-
-			// Set Position to a collider
-			while (!m_bFoundCollider && (m_nIterator < m_nNumColliders))
+			// IF prev NOT start sentinel && pos of DeQue first in window
+			if ((m_pDQListPos->ReadFront()->m_pPrev != m_pLLPos->GetStart()) && (m_pDQListPos->ReadFront()->m_data->fX > (m_pPlayerPos->fX - m_fDevResX)))
 			{
-				if (!m_apCollider[m_nIterator]->GetIsEnabled())
+				// pushFront prev pointer to DeQue
+				m_pDQListPos->PushFront(m_pDQListPos->ReadFront()->m_pPrev);
+
+				m_bFoundCollider = false;
+				m_nIterator = 0;
+
+				// Set Position to a collider
+				while (!m_bFoundCollider && (m_nIterator < m_nNumColliders))
 				{
-					m_bFoundCollider = true;
-					m_apCollider[m_nIterator]->SetIsEnabled(true);
-					m_apCollider[m_nIterator]->SetStartPos(m_dqListPos.ReadFront()->m_data);
+					if (!m_apCollider[m_nIterator]->GetIsEnabled())
+					{
+						m_bFoundCollider = true;
+						m_apCollider[m_nIterator]->SetIsEnabled(true);
+						m_apCollider[m_nIterator]->SetIsDead(false);
+						m_apCollider[m_nIterator]->SetStartPos(m_pDQListPos->ReadFront()->m_data);
+					}
+					++m_nIterator;
 				}
-				++m_nIterator;
+			}
+			// ELSE IF pos of DeQue first outside window && pos of next outside window
+			else if ((m_pDQListPos->ReadFront()->m_data->fX < (m_pPlayerPos->fX - m_fDevResX)) && (m_pDQListPos->ReadFront()->m_pNext->m_data->fX < (m_pPlayerPos->fX - m_fDevResX)))
+			{
+				m_bFoundCollider = false;
+				m_nIterator = 0;
+
+				// Disable collider
+				while (!m_bFoundCollider && (m_nIterator < m_nNumColliders))
+				{
+					if (m_apCollider[m_nIterator]->GetStartPos()->fX == m_pDQListPos->ReadFront()->m_data->fX)
+					{
+						m_bFoundCollider = true;
+
+						// If Collider Is Dead
+						if (m_apCollider[m_nIterator]->GetIsDead())
+						{
+							// remove position from list
+						}
+
+						m_apCollider[m_nIterator]->SetIsEnabled(false);
+						//m_apCollider[m_nIterator]->SetStartPos(nullptr);
+					}
+					++m_nIterator;
+				}
+
+				// PopFront DeQue
+				m_pDQListPos->PopFront();
+			}
+			// ELSE
+			else
+			{
+				// hasFirst
+				m_bHasFirst = true;
 			}
 		}
-		// ELSE IF pos of DeQue first outside window && pos of next outside window
-		else if ((m_dqListPos.ReadFront()->m_data->fX < (m_pPlayerPos->fX - m_fDevResX)) && (m_dqListPos.ReadFront()->m_pNext->m_data->fX < (m_pPlayerPos->fX - m_fDevResX)))
-		{
-			m_bFoundCollider = false;
-			m_nIterator = 0;
-
-			// Disable collider
-			while (!m_bFoundCollider && (m_nIterator < m_nNumColliders))
-			{
-				if (m_apCollider[m_nIterator]->GetStartPos() == m_dqListPos.ReadFront()->m_data)
-				{
-					m_bFoundCollider = true;
-					m_apCollider[m_nIterator]->SetIsEnabled(false);
-					m_apCollider[m_nIterator]->SetStartPos(nullptr);
-				}
-				++m_nIterator;
-			}
-
-			// PopFront DeQue
-			m_dqListPos.PopFront();
-		}
-		// ELSE
 		else
 		{
 			// hasFirst
@@ -127,10 +148,10 @@ void ColliderPosController::CheckEnds()
 	while (!m_bHasLast)
 	{
 		// IF next NOT end sentinel && pos of DeQue last in window
-		if ((m_dqListPos.ReadBack()->m_pNext != m_llPos.GetEnd()) && (m_dqListPos.ReadBack()->m_data->fX < (m_pPlayerPos->fX + m_fDevResX)))
+		if ((m_pDQListPos->ReadBack()->m_pNext != m_pLLPos->GetEnd()) && (m_pDQListPos->ReadBack()->m_data->fX < (m_pPlayerPos->fX + m_fDevResX)))
 		{
 			// pushBack next pointer to DeQue
-			m_dqListPos.PushBack(m_dqListPos.ReadBack()->m_pNext);
+			m_pDQListPos->PushBack(m_pDQListPos->ReadBack()->m_pNext);
 
 			m_bFoundCollider = false;
 			m_nIterator = 0;
@@ -142,13 +163,14 @@ void ColliderPosController::CheckEnds()
 				{
 					m_bFoundCollider = true;
 					m_apCollider[m_nIterator]->SetIsEnabled(true);
-					m_apCollider[m_nIterator]->SetStartPos(m_dqListPos.ReadBack()->m_data);
+					m_apCollider[m_nIterator]->SetIsDead(false);
+					m_apCollider[m_nIterator]->SetStartPos(m_pDQListPos->ReadBack()->m_data);
 				}
 				++m_nIterator;
 			}
 		}
 		// ELSE IF pos of DeQue last outside window && pos of prev outside window
-		else if ((m_dqListPos.ReadBack()->m_data->fX > (m_pPlayerPos->fX + m_fDevResX)) && (m_dqListPos.ReadBack()->m_pPrev->m_data->fX > (m_pPlayerPos->fX + m_fDevResX)))
+		else if ((m_pDQListPos->ReadBack()->m_data->fX > (m_pPlayerPos->fX + m_fDevResX)) && (m_pDQListPos->ReadBack()->m_pPrev->m_data->fX > (m_pPlayerPos->fX + m_fDevResX)))
 		{
 			m_bFoundCollider = false;
 			m_nIterator = 0;
@@ -156,17 +178,24 @@ void ColliderPosController::CheckEnds()
 			// Disable collider
 			while (!m_bFoundCollider && (m_nIterator < m_nNumColliders))
 			{
-				if (m_apCollider[m_nIterator]->GetStartPos() == m_dqListPos.ReadBack()->m_data)
+				if (m_apCollider[m_nIterator]->GetStartPos()->fX == m_pDQListPos->ReadBack()->m_data->fX)
 				{
 					m_bFoundCollider = true;
+
+					// If Collider Is Dead
+					if (m_apCollider[m_nIterator]->GetIsDead())
+					{
+						// remove position from list
+					}
+
 					m_apCollider[m_nIterator]->SetIsEnabled(false);
-					m_apCollider[m_nIterator]->SetStartPos(nullptr);
+					//m_apCollider[m_nIterator]->SetStartPos(nullptr);
 				}
 				++m_nIterator;
 			}
 
 			// PopBack DeQue
-			m_dqListPos.PopBack();
+			m_pDQListPos->PopBack();
 		}
 		// ELSE
 		else
@@ -179,6 +208,18 @@ void ColliderPosController::CheckEnds()
 }
 
 //----------------------------------------------------------
+// StartDeQue
+//		Starts DeQue
+//----------------------------------------------------------
+void ColliderPosController::StartDeQue()
+{
+	m_pDQListPos->PushBack(m_pLLPos->GetStart()->m_pNext);
+	m_apCollider[0]->SetIsEnabled(true);
+	m_apCollider[0]->SetStartPos(m_pDQListPos->ReadFront()->m_data);
+}
+
+
+//----------------------------------------------------------
 // GetPosList
 //		Gets Position List
 //		
@@ -187,5 +228,5 @@ void ColliderPosController::CheckEnds()
 //----------------------------------------------------------
 LinkedList<Pos*>* ColliderPosController::GetPosList()
 {
-	return &m_llPos;
+	return m_pLLPos;
 }

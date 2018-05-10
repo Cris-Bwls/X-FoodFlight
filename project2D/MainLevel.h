@@ -22,6 +22,10 @@ public:
 	MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pCamOp, Resolution* pResMod, Textures* pTextures, GameManager* pGame);
 	virtual ~MainLevel();
 
+	void Update(float deltaTime);
+
+	virtual void AddPositions() = 0;
+
 	bool UpdateUI(ELevel &eNewLevel);
 
 protected:

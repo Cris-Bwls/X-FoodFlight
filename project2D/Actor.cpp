@@ -157,3 +157,10 @@ void Actor::GetCurrentPos(float &fX, float &fY)
 	fX = m_pCurrentPos->fX;
 	fY = m_pCurrentPos->fY;
 }
+
+//----------------------------------------------------------
+//----------------------------------------------------------
+bool Actor::GetIsDead()
+{
+	return m_bIsDead;
+}

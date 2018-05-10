@@ -13,7 +13,7 @@
 #define PLAYER_SIZE_Y 64.0f	// Y size of texture
 #define PLAYER_RADIUS 45.25f // Using Pythag 45.25
 
-#define PLAYER_HORIZ_SPEED 2.0f	// Arbitrary
+#define PLAYER_HORIZ_SPEED 20.0f //2.0f	// Arbitrary
 #define PLAYER_VERT_SPEED 2.0f	// Arbitrary
 
 #define FISH_WEIGHT 100	//

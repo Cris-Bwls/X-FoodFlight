@@ -4,6 +4,7 @@
 
 #include "AnimFSM.h"
 #include "Textures.h"
+#include "Player.h"
 
 #define ENEMY_SIZE_X 64.0f // X size of texture
 #define ENEMY_SIZE_Y 64.0f // Y size of texture
@@ -53,7 +54,10 @@ Enemy::~Enemy()
 //----------------------------------------------------------
 void Enemy::Update(float deltaTime)
 {
-	Collision();
+	if (Collision())
+	{
+		m_pPlayer->TakeFish(true);
+	}
 }
 
 //----------------------------------------------------------

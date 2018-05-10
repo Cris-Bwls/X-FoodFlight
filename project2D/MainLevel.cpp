@@ -51,8 +51,8 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 
 	m_nActors[EACTOR_CLOUDS] = 2; //2;
 	m_nActors[EACTOR_WAVES] = 1; //1;
-	m_nActors[EACTOR_ENEMY] = 3; //3;
-	m_nActors[EACTOR_FISH] = 3; //3;
+	m_nActors[EACTOR_ENEMY] = 12; //12;
+	m_nActors[EACTOR_FISH] = 12; //12;
 
 	// UI Init
 	m_apUIElement = new UIElement*[m_nUIElements];
@@ -119,15 +119,17 @@ MainLevel::MainLevel(Application2D* pApp2D, aie::Font* pFont, CameraOperator* pC
 		tempPos->fY = 400.0f;
 
 		m_pEnemyPositions->GetPosList()->PushBack(tempPos);
+		m_pEnemyPositions->StartDeQue();
 	}
 	// Fish Position Init
 	m_pFishPositions = new ColliderPosController(pCamOp, m_pPlayer, (Collider**)m_apActor[EACTOR_FISH], m_nActors[EACTOR_FISH]);
 	{
 		Pos* tempPos = new Pos();
 		tempPos->fX = 300.0f;
-		tempPos->fY = 400.0f;
+		tempPos->fY = 50.0f;
 
 		m_pFishPositions->GetPosList()->PushBack(tempPos);
+		m_pFishPositions->StartDeQue();
 	}
 }
 
@@ -155,6 +157,58 @@ MainLevel::~MainLevel()
 	delete[] m_apActor;
 
 	delete m_pPlayer;
+
+	auto tempPosList = m_pEnemyPositions->GetPosList();
+	while (tempPosList->GetStart()->m_pNext != tempPosList->GetEnd())
+	{
+		delete tempPosList->GetData(0);
+		tempPosList->PopPoint(tempPosList->GetStart()->m_pNext);
+	}
+	delete m_pEnemyPositions;
+
+	tempPosList = m_pFishPositions->GetPosList();
+	while (tempPosList->GetStart()->m_pNext != tempPosList->GetEnd())
+	{
+		delete tempPosList->GetData(0);
+		tempPosList->PopPoint(tempPosList->GetStart()->m_pNext);
+	}
+	delete m_pFishPositions;
+}
+
+//----------------------------------------------------------
+// Update
+//----------------------------------------------------------
+void MainLevel::Update(float deltaTime)
+{
+#ifdef DEBUG_MODE
+	assert(m_apActor);
+#endif // DEBUG_MODE
+
+	// IF player exists
+	if (m_pPlayer != nullptr)
+	{
+		// Update player
+		m_pPlayer->Update(deltaTime);
+	}
+	// Add new positions if needed
+	AddPositions();
+
+	// Update Position Controllers
+	m_pEnemyPositions->Update();
+	m_pFishPositions->Update();
+
+	// Update Actors
+	for (int i = 0; i < EACTOR_TOTAL; ++i)
+	{
+		for (int j = 0; j < m_nActors[i]; ++j)
+		{
+#ifdef DEBUG_MODE
+			assert(m_apActor[i][j]);
+#endif // DEBUG_MODE
+
+			m_apActor[i][j]->Update(deltaTime);
+		}
+	}
 }
 
 //----------------------------------------------------------

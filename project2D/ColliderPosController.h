@@ -17,6 +17,7 @@ public:
 	void Update();
 
 	void CheckEnds();
+	void StartDeQue();
 
 	LinkedList<Pos*>* GetPosList();
 
@@ -24,8 +25,8 @@ private:
 	Collider**		m_apCollider;
 	Pos*			m_pPlayerPos;
 
-	LinkedList<Pos*> m_llPos;
-	DeQue<LinkedListNode<Pos*>*> m_dqListPos;
+	LinkedList<Pos*>* m_pLLPos;
+	DeQue<LinkedListNode<Pos*>*>* m_pDQListPos;
 
 	float m_fDevResX;
 
